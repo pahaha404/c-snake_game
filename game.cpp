@@ -31,9 +31,18 @@ while(true){
   Head_Direction = set_Head_Direction();
   Head_Direction = move_Snake();
   color();
-  score();
+  current_speed_level = stage_num + 1; // stage 0일 때 레벨 1, stage 3일 때 레벨 4
+  score(); // 이제 score() 함수가 실행될 때 바뀐 속도 레벨을 인식할 수 있습니다.
+  int base_delay = 200000;          // 기본 딜레이 (0.2초)
+  int speed_up = stage_num * 40000; // 스테이지당 0.04초씩 딜레이 단축
+  int final_delay = base_delay - speed_up;
 
-  usleep(200000);
+  // 너무 빨라져서 게임이 터지는 걸 방지 (최소 딜레이 0.08초 보장)
+  if (final_delay < 80000) {
+      final_delay = 80000;
+   }
+  
+  usleep(final_delay); // 계산된 동적 딜레이 적용
   end = time(NULL);
   
   if(end - start >= 3){
