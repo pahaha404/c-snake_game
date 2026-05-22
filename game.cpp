@@ -33,7 +33,7 @@ while(true){
   color();
   current_speed_level = stage_num + 1; // stage 0일 때 레벨 1, stage 3일 때 레벨 4
   score(); // 이제 score() 함수가 실행될 때 바뀐 속도 레벨을 인식할 수 있습니다.
-  int base_delay = 200000;          // 기본 딜레이 (0.2초)
+  int base_delay = 400000;          // 기본 딜레이 (0.4초)로 증가시킴
   int speed_up = stage_num * 40000; // 스테이지당 0.04초씩 딜레이 단축
   int final_delay = base_delay - speed_up;
 
