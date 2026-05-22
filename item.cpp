@@ -24,4 +24,13 @@ void generate_item(){
   } while(map[stage_num][py][px] != 0);
 
   map[stage_num][py][px] = 6;
+
+  // ── 추가: Reverse Direction Item 생성 ──
+  int rx, ry;
+  do {
+      rx = rand() % 30;
+      ry = rand() % 30;
+  } while (map[stage_num][ry][rx] != 0);
+  map[stage_num][ry][rx] = 8;
+  //추가 끝
 }

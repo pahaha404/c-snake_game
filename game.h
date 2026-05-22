@@ -34,6 +34,11 @@ int head_way[4][2] = {{0, -1}, {-1, 0}, {1, 0}, {0, 1}};
 int Head_Direction, Body_length, Growth_item, Poison_item, Gate_cnt, gate_posX, gate_posY;
 int stage_num=0, stage_flag=0;
 
+//추가 시작
+int Reverse_active = 0;
+time_t Reverse_start;
+int key_to_dir[4] = { 0, 1, 2, 3 };  // KEY_UP, KEY_LEFT, KEY_RIGHT, KEY_DOWN → 논리 방향
+//추가 끝
 
 struct snakepart{
   int x, y;

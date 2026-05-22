@@ -30,48 +30,36 @@ void make_snake(){
   getch();
 }
 
-//방향키 설정
-int set_Head_Direction(){
-  int key = getch();
+//방향키 설정        ---------------전체 수정------
+int set_Head_Direction() {
+    // 10초 경과 시 매핑 원복
+    if (Reverse_active && time(NULL) - Reverse_start >= 10) {
+        Reverse_active = 0;
+        key_to_dir[0] = 0; key_to_dir[1] = 1;
+        key_to_dir[2] = 2; key_to_dir[3] = 3;
+    }
 
-  switch(key){
-    case KEY_UP:
-      // 반대 방향이면 gameover
-      if(Head_Direction == 3){
-        NEXTGAME(3);
-        del_win();
-        exit(0);
-      }
-      Head_Direction = 0;
-      break;
-    case KEY_LEFT:
-      if(Head_Direction == 2){
-        NEXTGAME(3);
-        del_win();
-        exit(0);
-      }
-      Head_Direction = 1;
-      break;
-    case KEY_RIGHT:
-      if(Head_Direction == 1){
-        NEXTGAME(3);
-        del_win();
-        exit(0);
-      }
-      Head_Direction = 2;
-      break;
-    case KEY_DOWN:
-      if(Head_Direction == 0){
-        NEXTGAME(3);
-        del_win();
-        exit(0);
-      }
-      Head_Direction = 3;
-      break;
-  }
+    int key = getch();
+    int new_dir;
 
-  return Head_Direction;
-}
+    switch (key) {
+    case KEY_UP:    new_dir = key_to_dir[0]; break;
+    case KEY_LEFT:  new_dir = key_to_dir[1]; break;
+    case KEY_RIGHT: new_dir = key_to_dir[2]; break;
+    case KEY_DOWN:  new_dir = key_to_dir[3]; break;
+    default: return Head_Direction;  // 키 입력 없음 → 그대로
+    }
+
+    // 반대방향 검사: 반대쌍은 합이 3 (0↔3, 1↔2)
+    if (new_dir + Head_Direction == 3) {
+        NEXTGAME(3);
+        del_win();
+        exit(0);
+    }
+
+    Head_Direction = new_dir;
+    return Head_Direction;
+}//----------------수정 끝
 
 int move_Snake(){
   // 스네이크 다음 이동 위치
@@ -113,6 +101,31 @@ int move_Snake(){
     map[stage_num][snake[1].y][snake[1].x] = 4;
     refresh();
   }
+
+  // ── 추가: reverse direction item 먹을 때 ──
+  else if (map[stage_num][move_posY][move_posX] == 8) {
+      Reverse_active = 1;
+      Reverse_start = time(NULL);
+
+      // KEY_UP/LEFT/RIGHT 3개 키의 매핑을 셔플 (Fisher-Yates)
+      int dirs[3] = { 0, 1, 2 };
+      for (int i = 2; i > 0; i--) {
+          int j = rand() % (i + 1);
+          int t = dirs[i]; dirs[i] = dirs[j]; dirs[j] = t;
+      }
+      key_to_dir[0] = dirs[0];  // KEY_UP
+      key_to_dir[1] = dirs[1];  // KEY_LEFT
+      key_to_dir[2] = dirs[2];  // KEY_RIGHT
+      key_to_dir[3] = 3;        // KEY_DOWN은 그대로
+
+      // 일반 이동 (머리 +1, 꼬리 -1)
+      map[stage_num][snake[snake.size() - 1].y][snake[snake.size() - 1].x] = 0;
+      snake.pop_back();
+      snake.insert(snake.begin(), snakepart(move_posX, move_posY));
+      map[stage_num][snake[0].y][snake[0].x] = 3;
+      map[stage_num][snake[1].y][snake[1].x] = 4;
+      refresh();
+  }//  추가 끝
 
   // 게이트를 만났을 때
   else if(map[stage_num][move_posY][move_posX] == 7 && collision_gate() == 7){

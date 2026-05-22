@@ -14,8 +14,8 @@ void game(){
     while(true){
       // item, gate 초기화
       for(int i=0;i<30;i++){
-        for(int j=0; j<30; j++){
-          if(map[stage_num][i][j] == 5 || map[stage_num][i][j] == 6)  map[stage_num][i][j] = 0;
+        for(int j=0; j<30; j++){                                      //여기 바로 아래  '|| map[stage_num][i][j] == 8'추가함                              
+          if(map[stage_num][i][j] == 5 || map[stage_num][i][j] == 6 || map[stage_num][i][j] == 8)  map[stage_num][i][j] = 0;
           if(map[stage_num][i][j] == 7)  map[stage_num][i][j] = 1;
         }
       }
@@ -35,7 +35,7 @@ while(true){
 
   usleep(200000);
   end = time(NULL);
-
+  
   if(end - start >= 3){
     stage_num++;
     stage_flag = 1;
