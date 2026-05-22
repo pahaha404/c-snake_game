@@ -44,6 +44,7 @@ void score(){
   mvwprintw(win2, 5, 8, "+ : %d", goal[stage_num][1]);
   mvwprintw(win2, 7, 8, "- : %d", goal[stage_num][2]);
   mvwprintw(win2, 9, 8, "G : %d", goal[stage_num][3]);
+  mvwprintw(win3, 11, 2, "SPEED :    %d", current_speed_level); // 스코어보드에 speed 추가
 
   int size = snake.size();
   int current_size = snake.size();
