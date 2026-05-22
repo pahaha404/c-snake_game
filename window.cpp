@@ -12,6 +12,9 @@ void color_init(){
   init_pair(6, COLOR_RED, COLOR_RED);         // Poison Item
   init_pair(7, COLOR_YELLOW, COLOR_YELLOW);   // Gate
   init_pair(8, COLOR_WHITE, COLOR_WHITE);     // Blank
+  // ── 추가 ──
+  init_pair(9, COLOR_MAGENTA, COLOR_MAGENTA); // Reverse Direction Item
+  //추가 끝
 }
 
 void color(){
@@ -65,6 +68,13 @@ void color(){
         mvwprintw(win1, i, j, "%d", map[stage_num][i][j]);
         wattroff(win1, COLOR_PAIR(7));
       }
+      // ── 추가 ──
+      else if (map[stage_num][i][j] == 8) {
+          wattron(win1, COLOR_PAIR(9));
+          mvwprintw(win1, i, j, "%d", map[stage_num][i][j]);
+          wattroff(win1, COLOR_PAIR(9));
+      }
+      //추가 끝
     }
   }
   wrefresh(win1);
@@ -128,6 +138,11 @@ void set_zero(){
   Gate_cnt = 0;
   gate_posX = 0;
   gate_posY = 0;
+  // ── 추가 ──
+  Reverse_active = 0;
+  key_to_dir[0] = 0; key_to_dir[1] = 1;
+  key_to_dir[2] = 2; key_to_dir[3] = 3;
+  //추가 끝
 }
 
 void NEXTGAME(int num){
