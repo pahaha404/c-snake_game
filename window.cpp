@@ -18,63 +18,17 @@ void color_init(){
 }
 
 void color(){
+  // 기존의 반복적인 대형 if-else 구문을 배열 매핑으로 최적화 및 간소화
+  int pair_map[] = {8, 1, 2, 3, 4, 5, 6, 7, 9};
   for(int i=0; i<30; i++){
     for(int j=0; j<30; j++){
-      // 직사각형 모양인데 색 O
-      if(map[stage_num][i][j] == 0){
-        wattron(win1, COLOR_PAIR(8));
-        mvwprintw(win1, i, j, "%d", map[stage_num][i][j]);
-        wattroff(win1, COLOR_PAIR(8));
+      int val = map[stage_num][i][j];
+      if(val >= 0 && val <= 8){
+        wattron(win1, COLOR_PAIR(pair_map[val]));
+        // 기존 %d(숫자) 출력에서 공백(" ") 출력으로 변경하여 색상 블록만 렌더링
+        mvwprintw(win1, i, j, " ");
+        wattroff(win1, COLOR_PAIR(pair_map[val]));
       }
-
-      else if(map[stage_num][i][j] == 1){
-        wattron(win1, COLOR_PAIR(1));
-        mvwprintw(win1, i, j, "%d", map[stage_num][i][j]);
-        wattroff(win1, COLOR_PAIR(1));
-      }
-
-      else if(map[stage_num][i][j] == 2){
-        wattron(win1, COLOR_PAIR(2));
-        mvwprintw(win1, i, j, "%d", map[stage_num][i][j]);
-        wattroff(win1, COLOR_PAIR(2));
-      }
-
-      else if(map[stage_num][i][j] == 3){
-        wattron(win1, COLOR_PAIR(3));
-        mvwprintw(win1, i, j, "%d", map[stage_num][i][j]);
-        wattroff(win1, COLOR_PAIR(3));
-      }
-
-      else if(map[stage_num][i][j] == 4){
-        wattron(win1, COLOR_PAIR(4));
-        mvwprintw(win1, i, j, "%d", map[stage_num][i][j]);
-        wattroff(win1, COLOR_PAIR(4));
-      }
-
-      else if(map[stage_num][i][j] == 5){
-        wattron(win1, COLOR_PAIR(5));
-        mvwprintw(win1, i, j, "%d", map[stage_num][i][j]);
-        wattroff(win1, COLOR_PAIR(5));
-      }
-
-      else if(map[stage_num][i][j] == 6){
-        wattron(win1, COLOR_PAIR(6));
-        mvwprintw(win1, i, j, "%d", map[stage_num][i][j]);
-        wattroff(win1, COLOR_PAIR(6));
-      }
-
-      else if(map[stage_num][i][j] == 7){
-        wattron(win1, COLOR_PAIR(7));
-        mvwprintw(win1, i, j, "%d", map[stage_num][i][j]);
-        wattroff(win1, COLOR_PAIR(7));
-      }
-      // ── 추가 ──
-      else if (map[stage_num][i][j] == 8) {
-          wattron(win1, COLOR_PAIR(9));
-          mvwprintw(win1, i, j, "%d", map[stage_num][i][j]);
-          wattroff(win1, COLOR_PAIR(9));
-      }
-      //추가 끝
     }
   }
   wrefresh(win1);
@@ -83,7 +37,6 @@ void color(){
 void score(){
   // Body_length, Growth_item, Poison_item, Gate_cnt
   int goal[4][4] = {{5, 2, 1, 1}, {10, 4, 2, 2}, {15, 6, 4, 3}, {15, 6, 5, 4}};
-
   // 목표 점수 표시
   wborder(win2, '|', '|', '-', '-', '+', '+', '+', '+');
   mvwprintw(win2, 1, 6, "*Mission*");
