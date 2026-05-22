@@ -33,6 +33,7 @@ void game();
 int head_way[4][2] = {{0, -1}, {-1, 0}, {1, 0}, {0, 1}};
 int Head_Direction, Body_length, Growth_item, Poison_item, Gate_cnt, gate_posX, gate_posY;
 int stage_num=0, stage_flag=0;
+int current_speed_level = 1; // snake의 현재 속도레벨 표시, 후에 스코어보드에서 표시할 수 있도록 전역변수 설정
 
 //추가 시작
 int Reverse_active = 0;
