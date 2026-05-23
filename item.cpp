@@ -2,7 +2,7 @@
 
 #include "game.h"
 
-void generate_item(){
+void SnakeGame::generate_item(){
   srand((unsigned) time(0));
 
   int gx, gy;

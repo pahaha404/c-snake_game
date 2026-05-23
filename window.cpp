@@ -1,6 +1,6 @@
 #include "game.h"
 
-void color_init(){
+void SnakeGame::color_init(){
   // 글씨 배경 순서
   init_color(COLOR_GRAY, 150, 150, 150);      // 회색으로 설정
   init_pair(1, COLOR_GRAY, COLOR_GRAY);       // Wall
@@ -18,7 +18,7 @@ void color_init(){
   //추가 끝
 }
 
-void color(){
+void SnakeGame::color(){
   // 기존의 반복적인 대형 if-else 구문을 배열 매핑으로 최적화 및 간소화
   int pair_map[] = {8, 1, 2, 3, 4, 5, 6, 7, 9};
   for(int i=0; i<30; i++){
@@ -40,7 +40,7 @@ void color(){
   wrefresh(win1);
 }
 
-void score(){
+void SnakeGame::score(){
   // Body_length, Growth_item, Poison_item, Gate_cnt
   int goal[4][4] = {{5, 2, 1, 1}, {10, 4, 2, 2}, {15, 6, 4, 3}, {15, 6, 5, 4}};
   // 목표 점수 표시
@@ -90,7 +90,7 @@ void score(){
   wrefresh(win3);
 }
 
-void set_zero(){
+void SnakeGame::set_zero(){
   stage_flag = 0;
   Body_length = 0;
   Growth_item = 0;
@@ -105,7 +105,7 @@ void set_zero(){
   //추가 끝
 }
 
-void NEXTGAME(int num){
+void SnakeGame::NEXTGAME(int num){
   wclear(win1);
   if(num == 1){
     mvwprintw(win1, 10, 24, "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★");
@@ -131,7 +131,7 @@ void NEXTGAME(int num){
   wclear(win1);
 }
 
-void del_win(){
+void SnakeGame::del_win(){
   delwin(win3);
   delwin(win2);
   delwin(win1);

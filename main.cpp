@@ -9,18 +9,21 @@ int main() {
   curs_set(0);
   keypad(stdscr, TRUE);
 
+  // SnakeGame 객체 생성
+  SnakeGame snakeGame;
+
   if (has_colors()) {
     start_color();
-    color_init();
+    snakeGame.color_init();
   }
 
-  win1 = newwin(30, 30, 1, 2);
-  win2 = newwin(12, 20, 1, 35);
-  win3 = newwin(13, 20, 14, 35); // 스코어보드 크기 늘림
+  snakeGame.win1 = newwin(30, 30, 1, 2);
+  snakeGame.win2 = newwin(12, 20, 1, 35);
+  snakeGame.win3 = newwin(12, 20, 14, 35);
 
   refresh();
-  game();
-  del_win();
+  snakeGame.game();
+  snakeGame.del_win();
 
   return 0;
 }

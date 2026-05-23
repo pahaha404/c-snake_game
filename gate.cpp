@@ -152,7 +152,7 @@ bool Gate::canExitTo(const int x, const int y, const int stage_num) const {
 // 충돌 판정: snake 머리의 다음 위치가 게이트인지 확인
 // 반환값: 7 (노란 gate), 11 (파란 gate), 0 (게이트 아님)
 // -----------------------------------------------------------------------------
-int collision_gate() {
+int SnakeGame::collision_gate() {
     const int nextX = snake[0].x + head_way[Head_Direction][0];
     const int nextY = snake[0].y + head_way[Head_Direction][1];
 
@@ -176,7 +176,7 @@ int collision_gate() {
 // -----------------------------------------------------------------------------
 // 게이트 한 쌍씩 생성 (노란, 파란 각각)
 // -----------------------------------------------------------------------------
-void generate_gate() {
+void SnakeGame::generate_gate() {
     srand((unsigned) time(0));
 
     int x1 = 0, y1 = 0, x2 = 0, y2 = 0;
@@ -244,7 +244,7 @@ void generate_gate() {
 // -----------------------------------------------------------------------------
 // 노란 gate 통과 후 진출 방향 결정
 // -----------------------------------------------------------------------------
-int pass_the_gate() {
+int SnakeGame::pass_the_gate() {
     Head_Direction = g_yellow.computeExitDirection(Head_Direction, stage_num);
     return Head_Direction;
 }
@@ -252,7 +252,7 @@ int pass_the_gate() {
 // -----------------------------------------------------------------------------
 // 파란 gate 통과 후 진출 방향 결정
 // -----------------------------------------------------------------------------
-int pass_the_blue_gate() {
+int SnakeGame::pass_the_blue_gate() {
     Head_Direction = g_blue.computeExitDirection(Head_Direction, stage_num);
     return Head_Direction;
 }
@@ -264,7 +264,7 @@ int pass_the_blue_gate() {
 //   - use_count 반영 -> Gate_cnt 증가
 // 반환: 1=노란 통과 완료, 2=파란 통과 완료, 0=아무것도 안 함
 // -----------------------------------------------------------------------------
-int finish_active_gate() {
+int SnakeGame::finish_active_gate() {
     if (g_active_color == 1) {
         // 노란 gate 통과 완료
         if (g_yellow.active) {

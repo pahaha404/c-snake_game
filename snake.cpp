@@ -1,7 +1,7 @@
 #include "game.h"
 
 // 스네이크 생성
-void make_snake(){
+void SnakeGame::make_snake(){
   int snake_location[4][3][2] = {
     {{4, 23}, {6, 8}, {18, 16}},
     {{15, 14}, {21, 9}, {3, 18}},
@@ -31,7 +31,7 @@ void make_snake(){
 }
 
 //방향키 설정        ---------------전체 수정------
-int set_Head_Direction() {
+int SnakeGame::set_Head_Direction() {
     // 10초 경과 시 매핑 원복
     if (Reverse_active && time(NULL) - Reverse_start >= 10) {
         Reverse_active = 0;
@@ -61,7 +61,7 @@ int set_Head_Direction() {
     return Head_Direction;
 }//----------------수정 끝
 
-int move_Snake(){
+int SnakeGame::move_Snake(){
   // 스네이크 다음 이동 위치
   int move_posX = snake[0].x + head_way[Head_Direction][0];
   int move_posY = snake[0].y + head_way[Head_Direction][1];

@@ -4,7 +4,7 @@
 #include "item.cpp"
 
 
-void game(){
+void SnakeGame::game(){
   while(true){
     time_t start, end;
     Head_Direction = 1;
