@@ -2,10 +2,13 @@ CC=g++
 TARGET=snakegame
 OBJECTS=main.cpp
 
-all:$(TARGET)
+CXXFLAGS=-I/ucrt64/include/ncurses -std=c++11
+LDFLAGS=-L/ucrt64/lib -lncursesw
 
-$(TARGET):$(OBJECTS)
-	$(CC) -o $(TARGET) $(OBJECTS) -lncursesw -std=c++11
+all: $(TARGET)
+
+$(TARGET): $(OBJECTS)
+	$(CC) -o $(TARGET) $(OBJECTS) $(CXXFLAGS) $(LDFLAGS)
 
 clean:
-	rm $(TARGET)
+	rm -f $(TARGET)

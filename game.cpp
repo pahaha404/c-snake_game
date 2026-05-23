@@ -1,7 +1,8 @@
 #include "window.cpp"
+#include "gate.cpp"
 #include "snake.cpp"
 #include "item.cpp"
-#include "gate.cpp"
+
 
 void game(){
   while(true){
@@ -16,10 +17,11 @@ void game(){
       for(int i=0;i<30;i++){
         for(int j=0; j<30; j++){                                      //여기 바로 아래  '|| map[stage_num][i][j] == 8'추가함                              
           if(map[stage_num][i][j] == 5 || map[stage_num][i][j] == 6 || map[stage_num][i][j] == 8)  map[stage_num][i][j] = 0;
-          if(map[stage_num][i][j] == 7)  map[stage_num][i][j] = 1;
+          if(map[stage_num][i][j] == 7 || map[stage_num][i][j] == 11) map[stage_num][i][j] = 1;
         }
       }
       gate.clear();
+      blue_gate.clear();
       refresh();
 
       generate_item(); // item 생성
@@ -45,7 +47,7 @@ while(true){
   usleep(final_delay); // 계산된 동적 딜레이 적용
   end = time(NULL);
   
-  if(end - start >= 3){
+  if(end - start >= 15){
     stage_num++;
     stage_flag = 1;
     break;

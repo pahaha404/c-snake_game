@@ -127,18 +127,34 @@ int move_Snake(){
       refresh();
   }//  추가 끝
 
-  // 게이트를 만났을 때
+  // 노란 gate를 만났을 때
   else if(map[stage_num][move_posY][move_posX] == 7 && collision_gate() == 7){
     Head_Direction = pass_the_gate();
 
-    gate_posX = gate[gate[2].y].x + head_way[Head_Direction][0];
-    gate_posY = gate[gate[2].y].y + head_way[Head_Direction][1];
+    gate_posX = get_yellow_exit_x() + head_way[Head_Direction][0];
+    gate_posY = get_yellow_exit_y() + head_way[Head_Direction][1];
 
     map[stage_num][snake[snake.size()-1].y][snake[snake.size()-1].x] = 0;
     snake.pop_back();
     snake.insert(snake.begin(), snakepart(gate_posX, gate_posY));
     map[stage_num][snake[0].y][snake[0].x] = 3;
     map[stage_num][snake[1].y][snake[1].x] = 4;
+    refresh();
+  }
+
+  // 파란 gate를 만났을 때
+  else if(map[stage_num][move_posY][move_posX] == 11 && collision_gate() == 11){
+    Head_Direction = pass_the_blue_gate();
+
+    gate_posX = get_blue_exit_x() + head_way[Head_Direction][0];
+    gate_posY = get_blue_exit_y() + head_way[Head_Direction][1];
+
+    // body +1 효과: 꼬리를 pop하지 않음
+    snake.insert(snake.begin(), snakepart(gate_posX, gate_posY));
+    map[stage_num][snake[0].y][snake[0].x] = 3;
+    map[stage_num][snake[1].y][snake[1].x] = 4;
+
+    Growth_item += 1;
     refresh();
   }
 
@@ -154,12 +170,9 @@ int move_Snake(){
   // 아무것도 만나지 않을 때
   else{
     // 스네이크 전체가 gate를 다 통과했을 때
-    if(snake[snake.size()-1].x == gate_posX && snake[snake.size()-1].y == gate_posY){
-      map[stage_num][gate[0].y][gate[0].x] = 1;
-      map[stage_num][gate[1].y][gate[1].x] = 1;
+    if(gate_posX != 0 && snake[snake.size()-1].x == gate_posX && snake[snake.size()-1].y == gate_posY){
+      finish_active_gate();
       gate_posX = 0; gate_posY = 0;
-      Gate_cnt += 1;
-      gate.clear();
       refresh();
     }
 

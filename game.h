@@ -57,3 +57,4 @@ snakepart::snakepart(){
 
 vector<snakepart> snake;
 vector<snakepart> gate;
+vector<snakepart> blue_gate; //추가

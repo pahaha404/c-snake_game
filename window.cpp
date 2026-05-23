@@ -14,6 +14,7 @@ void color_init(){
   init_pair(8, COLOR_WHITE, COLOR_WHITE);     // Blank
   // ── 추가 ──
   init_pair(9, COLOR_MAGENTA, COLOR_MAGENTA); // Reverse Direction Item
+  init_pair(11, COLOR_BLUE, COLOR_BLUE); // blue gate 추가
   //추가 끝
 }
 
@@ -29,6 +30,11 @@ void color(){
         mvwprintw(win1, i, j, " ");
         wattroff(win1, COLOR_PAIR(pair_map[val]));
       }
+      else if(val == 11){
+        wattron(win1, COLOR_PAIR(11));
+        mvwprintw(win1, i, j, " ");
+        wattroff(win1, COLOR_PAIR(11));
+      }//추가
     }
   }
   wrefresh(win1);
