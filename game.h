@@ -1,3 +1,11 @@
+/**
+ * @file game.h
+ * @brief Snake Game의 메인 제어 클래스(SnakeGame) 정의 헤더
+ * @details 전체 게임 루프 조율, NCURSES 윈도우 인스턴스 관리,
+ *          점수 계산 및 최고 점수 로딩/저장 기능을 총괄합니다.
+ * @author Hansol
+ * @date 2026-05-28
+ */
 #pragma once
 
 #include <ncurses.h>
@@ -8,7 +16,7 @@
 #include <time.h>
 #include <string>
 #include <fstream>
-#include "map.h"
+#include "board.h"
 #include "snake.h"      
 #include "gate.h"       
 

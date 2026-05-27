@@ -1,3 +1,11 @@
+/**
+ * @file gate.cpp
+ * @brief Gate 객체 및 진출입 알고리즘 구현 파일
+ * @details 맵 벽 상에 게이트 한 쌍 생성, 진입 판정, 그리고
+ *          진입 방향에 따른 동적 진출 좌표/방향 산출 기능을 수행합니다.
+ * @author Hansol
+ * @date 2026-05-28
+ */
 #include "game.h"
 #include "gate.h"
 

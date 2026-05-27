@@ -1,3 +1,11 @@
+/**
+ * @file window.cpp
+ * @brief NCURSES 화면 렌더링 및 점수판 관리 구현 파일
+ * @details 게임 화면(win1), 미션 현황(win2), 그리고 현재/최고 점수판(win3)의
+ *          그리기 기능, 색상 초기화 및 화면 전환 애니메이션을 관리합니다.
+ * @author Hansol
+ * @date 2026-05-28
+ */
 #include "game.h"
 
 void SnakeGame::color_init(){

@@ -1,3 +1,11 @@
+/**
+ * @file snake.cpp
+ * @brief Snake 객체의 생명 주기 및 이동 로직 구현 파일
+ * @details 뱀의 리스폰 좌표 관리, 방향 전환 제어(Reverse 매핑 포함),
+ *          그리고 Growth/Poison 아이템 획득 및 게이트 처리 로직을 가집니다.
+ * @author Hansol
+ * @date 2026-05-28
+ */
 #include "snake.h"
 #include "game.h"   
 #include <cstdlib>

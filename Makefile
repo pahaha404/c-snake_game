@@ -1,6 +1,6 @@
 CC = g++
 TARGET = snakegame
-SOURCES = main.cpp game.cpp snake.cpp window.cpp gate.cpp item.cpp map.cpp
+SOURCES = main.cpp game.cpp snake.cpp window.cpp gate.cpp item.cpp board.cpp food.cpp poison.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 
 CXXFLAGS = -I/ucrt64/include/ncurses -std=c++11

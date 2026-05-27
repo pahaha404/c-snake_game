@@ -1,3 +1,11 @@
+/**
+ * @file gate.h
+ * @brief Gate 객체 및 진출입 알고리즘 선언 헤더
+ * @details 노란 게이트와 파란 게이트(보너스 효과)를 지원하며,
+ *          가장자리/내부의 진출 방향 우선순위를 탐색하는 멤버 함수를 정의합니다.
+ * @author Hansol
+ * @date 2026-05-28
+ */
 #ifndef GATE_H
 #define GATE_H
 

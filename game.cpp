@@ -1,3 +1,11 @@
+/**
+ * @file game.cpp
+ * @brief Snake Game의 메인 게임 진행 루프 구현 파일
+ * @details 스테이지 초기화, 동적 속도 난이도 지연 처리 및
+ *          스테이지 클리어/실패 플로우 제어를 수행합니다.
+ * @author Hansol
+ * @date 2026-05-28
+ */
 #include "game.h"
 
 void SnakeGame::game(){
