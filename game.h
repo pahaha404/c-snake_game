@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <time.h>
 #include <string>
+#include <fstream>
 #include "map.h"
 #include "snake.h"      
 #include "gate.h"       
@@ -28,6 +29,7 @@ public:
     int stage_num;
     int stage_flag;
     int current_speed_level;
+    int High_Score; // 최고 점수 저장용 변수
 
     vector<snakepart> gate;
     vector<snakepart> blue_gate;
@@ -50,6 +52,14 @@ public:
         gate_posX = 0; gate_posY = 0;
         stage_num = 0; stage_flag = 0;
         current_speed_level = 1;
+
+        // 파일로부터 최고 점수 불러오기
+        High_Score = 0;
+        ifstream infile("highscore.txt");
+        if (infile.is_open()) {
+            infile >> High_Score;
+            infile.close();
+        }
 
         snake_obj.bind(this);
     }
@@ -75,7 +85,7 @@ public:
     int  pass_the_blue_gate();
     int  finish_active_gate();
 
-    void NEXTGAME(int num);
+    void NEXTGAME(const int num);
     void game();
 };
 

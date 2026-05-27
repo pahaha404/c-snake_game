@@ -33,8 +33,8 @@ void SnakeGame::game(){
                 color();
                 current_speed_level = stage_num + 1;
                 score();
-                int base_delay = 400000;
-                int speed_up   = stage_num * 40000;
+                const int base_delay = 400000;
+                const int speed_up   = stage_num * 40000;
                 int final_delay = base_delay - speed_up;
                 if (final_delay < 80000) final_delay = 80000;
                 usleep(final_delay);

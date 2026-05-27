@@ -17,7 +17,7 @@ Snake::Snake() {
 }
 
 void Snake::make_snake(){
-    int snake_location[4][3][2] = {
+    static const int snake_location[4][3][2] = {
         {{4, 23}, {6, 8}, {18, 16}},
         {{15, 14}, {21, 9}, {3, 18}},
         {{4, 15}, {27, 18}, {16, 15}},
