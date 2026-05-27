@@ -18,7 +18,7 @@ inline snakepart::snakepart()                 { x = 0;   y = 0;   }
 
 static const int head_way[4][2] = {{0, -1}, {-1, 0}, {1, 0}, {0, 1}};
 
-class SnakeGame;   // 전방 선언 — gate.h/game.h 순환 방지
+class SnakeGame;   // 전방 선언 — game.h 순환 방지
 
 class Snake {
 public:
