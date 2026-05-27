@@ -8,8 +8,8 @@
 #include <time.h>
 #include <string>
 #include "map.h"
-#include "snake.h"      // ★ snakepart, head_way, Snake — gate.h보다 먼저
-#include "gate.h"       // ★ 팀원의 게이트 헤더
+#include "snake.h"      
+#include "gate.h"       
 
 using namespace std;
 
@@ -34,7 +34,7 @@ public:
 
     Snake snake_obj;
 
-    // 하위 호환 alias: gate.cpp/item.cpp가 이전 이름으로 접근 가능
+    // alias: gate.cpp/item.cpp가 이전 이름으로 접근 가능
     int&               Head_Direction = snake_obj.Head_Direction;
     int&               Body_length    = snake_obj.Body_length;
     int&               Growth_item    = snake_obj.Growth_item;
@@ -65,10 +65,10 @@ public:
     // int  set_Head_Direction();
     // int  move_Snake();
 
-    // 아이템 (팀원 미분리 — 그대로 유지)
+    // 아이템 (그대로 유지)
     void generate_item();
 
-    // 게이트 (팀원의 gate.cpp에서 SnakeGame::로 구현되어 있음 → 선언 유지)
+    
     int  collision_gate();
     void generate_gate();
     int  pass_the_gate();
