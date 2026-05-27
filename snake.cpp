@@ -1,5 +1,5 @@
 #include "snake.h"
-#include "game.h"   // SnakeGame 정의, gate.h의 자유 함수도 함께 가져옴
+#include "game.h"   
 #include <cstdlib>
 
 Snake::Snake() {
