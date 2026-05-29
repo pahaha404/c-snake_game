@@ -13,6 +13,7 @@
 #include "GrowthItem.h"
 #include "PoisonItem.h"
 #include "ReverseItem.h"
+#include "GoldenApple.h"
 
 using namespace std;
 
@@ -52,11 +53,11 @@ public:
     int(&key_to_dir)[4] = snake_obj.key_to_dir;
     vector<snakepart>& snake = snake_obj.snake;
 
-    SnakeGame() 
+    SnakeGame()
         : yellow_gate(CELL_GATE),
-          blue_gate_obj(CELL_BLUE_GATE),
-          active_gate_color(0)
-        {
+        blue_gate_obj(CELL_BLUE_GATE),
+        active_gate_color(0)
+    {
         win1 = nullptr; win2 = nullptr; win3 = nullptr;
         Gate_cnt = 0;
         gate_posX = 0; gate_posY = 0;
