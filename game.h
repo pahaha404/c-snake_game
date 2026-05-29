@@ -34,6 +34,11 @@ public:
 
     Snake snake_obj;
 
+    Gate yellow_gate;       // 노란 게이트 (cell_value = 7)
+    Gate blue_gate_obj;     // 파란 게이트 (cell_value = 11)
+
+    int  active_gate_color; // 통과 중인 게이트: 1=노란, 2=파란, 0=없음
+
     // alias: gate.cpp/item.cpp가 이전 이름으로 접근 가능
     int&               Head_Direction = snake_obj.Head_Direction;
     int&               Body_length    = snake_obj.Body_length;
@@ -44,7 +49,11 @@ public:
     int              (&key_to_dir)[4] = snake_obj.key_to_dir;
     vector<snakepart>& snake          = snake_obj.snake;
 
-    SnakeGame() {
+    SnakeGame() 
+        : yellow_gate(CELL_GATE),
+          blue_gate_obj(CELL_BLUE_GATE),
+          active_gate_color(0)
+        {
         win1 = nullptr; win2 = nullptr; win3 = nullptr;
         Gate_cnt = 0;
         gate_posX = 0; gate_posY = 0;
@@ -74,6 +83,12 @@ public:
     int  pass_the_gate();
     int  pass_the_blue_gate();
     int  finish_active_gate();
+
+    // 게이트 진출 좌표 getter
+    int  get_yellow_exit_x() const;
+    int  get_yellow_exit_y() const;
+    int  get_blue_exit_x()   const;
+    int  get_blue_exit_y()   const;
 
     void NEXTGAME(int num);
     void game();
