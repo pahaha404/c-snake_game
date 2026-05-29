@@ -1,11 +1,9 @@
 /**
- * @file snake.cpp
- * @brief Snake 객체의 초기화, 입력 처리, 이동 및 충돌 로직을 구현하는 파일
- * @details 뱀의 몸통 좌표 벡터를 갱신하면서 보드 map에 머리와 몸통 상태를 반영합니다.
- *          Growth/Poison/Reverse 아이템 효과, 벽 및 자기 몸 충돌, 노란색/파란색 게이트 통과처럼
- *          한 턴 이동 중 발생할 수 있는 규칙을 처리합니다.
- * @author Hansol
- * @date 2026-05-28
+ * snake.cpp
+ * Snake 객체의 초기화, 입력 처리, 이동 및 충돌 로직을 구현하는 파일
+ * 뱀의 몸통 좌표 벡터를 갱신하면서 보드 map에 머리와 몸통 상태를 반영합니다.
+ * Growth/Poison/Reverse 아이템 효과, 벽 및 자기 몸 충돌, 노란색/파란색 게이트 통과처럼
+ * 한 턴 이동 중 발생할 수 있는 규칙을 처리합니다.
  */
 #include "snake.h"
 #include "game.h"
@@ -59,7 +57,7 @@ void Snake::make_snake(){
 }
 
 int Snake::set_Head_Direction() {
-    // Reverse 효과는 10초가 지나면 방향키 매핑을 기본 상태로 되돌립니다.
+    
     if (Reverse_active && time(NULL) - Reverse_start >= 10) {
         Reverse_active = 0;
         key_to_dir[0] = 0; key_to_dir[1] = 1;
@@ -69,7 +67,7 @@ int Snake::set_Head_Direction() {
     int key = getch();
     int new_dir;
 
-    // 현재 방향키 매핑을 사용하므로 Reverse 효과 중에는 같은 키가 다른 방향으로 해석됩니다.
+    
     switch (key) {
     case KEY_UP:    new_dir = key_to_dir[0]; break;
     case KEY_LEFT:  new_dir = key_to_dir[1]; break;
