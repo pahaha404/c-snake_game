@@ -14,9 +14,9 @@ struct snakepart {
 };
 
 inline snakepart::snakepart(int col, int row) { x = col; y = row; }
-inline snakepart::snakepart()                 { x = 0;   y = 0;   }
+inline snakepart::snakepart() { x = 0;   y = 0; }
 
-static const int head_way[4][2] = {{0, -1}, {-1, 0}, {1, 0}, {0, 1}};
+static const int head_way[4][2] = { {0, -1}, {-1, 0}, {1, 0}, {0, 1} };
 
 class SnakeGame;   // 전방 선언 — game.h 순환 방지
 
@@ -39,5 +39,7 @@ public:
     void make_snake();
     int  set_Head_Direction();
     int  move_Snake();
-};
 
+    // Reverse 아이템: 현재 진행방향 기준으로 좌우(수직) 화살표 키를 교환
+    void update_reverse_keys();
+};
