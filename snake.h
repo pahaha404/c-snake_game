@@ -1,12 +1,10 @@
 /**
- * @file snake.h
- * @brief Snake 객체의 상태와 이동 로직을 선언하는 헤더 파일
- * @details 뱀의 몸통 좌표, 현재 진행 방향, 아이템 획득 수, Reverse 효과 상태를 관리하는
- *          Snake 클래스와 좌표 단위 구조체를 정의합니다. 입력 처리, 충돌 판정, 아이템 및
- *          게이트 통과 처리는 snake.cpp에서 구현됩니다.
- * @author Hansol
- * @date 2026-05-28
+ * 객체의 상태와 이동 로직을 선언하는 헤더 파일
+ * 뱀의 몸통 좌표, 현재 진행 방향, 아이템 획득 수, Reverse 효과 상태를 관리하는
+ * Snake 클래스와 좌표 단위 구조체를 정의합니다. 입력 처리, 충돌 판정, 아이템 및
+ * 게이트 통과 처리는 snake.cpp에서 구현됩니다.
  */
+
 #pragma once
 
 #include <ncurses.h>
@@ -17,8 +15,8 @@
 using namespace std;
 
 /**
- * @brief 뱀 몸통 한 칸의 보드 좌표를 저장하는 구조체
- * @details x는 열(col), y는 행(row)을 의미합니다.
+ * 뱀 몸통 한 칸의 보드 좌표를 저장하는 구조체
+ * x는 열(col), y는 행(row)을 의미합니다.
  */
 struct snakepart {
     int x, y;
@@ -35,10 +33,10 @@ static const int head_way[4][2] = {{0, -1}, {-1, 0}, {1, 0}, {0, 1}};
 class SnakeGame;   // 전방 선언으로 game.h와의 순환 참조를 방지합니다.
 
 /**
- * @brief 뱀의 현재 상태와 한 턴 단위 이동을 담당하는 클래스
- * @details Snake는 몸통 좌표 벡터를 직접 관리하고, 보드 map에는 머리(3), 몸통(4) 등
- *          렌더링에 필요한 값을 기록합니다. 스테이지 번호, 게이트 처리, 게임 종료 화면처럼
- *          전체 게임 흐름이 필요한 작업은 bind된 SnakeGame 객체에 위임합니다.
+ * 뱀의 현재 상태와 한 턴 단위 이동을 담당하는 클래스
+ * Snake는 몸통 좌표 벡터를 직접 관리하고, 보드 map에는 머리(3), 몸통(4) 등
+ * 렌더링에 필요한 값을 기록합니다. 스테이지 번호, 게이트 처리, 게임 종료 화면처럼
+ * 전체 게임 흐름이 필요한 작업은 bind된 SnakeGame 객체에 위임합니다.
  */
 class Snake {
 public:
@@ -58,7 +56,7 @@ public:
 
     SnakeGame* game;
 
-    // 방향, 점수, Reverse 상태를 기본값으로 초기화합니다.
+    
     Snake();
 
     // Snake가 SnakeGame의 스테이지/게이트/화면 제어 기능을 사용할 수 있도록 연결합니다.
