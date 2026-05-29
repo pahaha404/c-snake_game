@@ -129,12 +129,13 @@ int Snake::move_Snake(){
         map[stage_num][snake[1].y][snake[1].x] = 4;
         refresh();
     }
+
     // 노란 gate
     else if(map[stage_num][move_posY][move_posX] == 7 && game->collision_gate() == 7){
         Head_Direction = game->pass_the_gate();
-        game->gate_posX = get_yellow_exit_x() + head_way[Head_Direction][0];   // 자유 함수
-        game->gate_posY = get_yellow_exit_y() + head_way[Head_Direction][1];
-
+        game->gate_posX = game->get_yellow_exit_x() + head_way[Head_Direction][0];
+        game->gate_posY = game->get_yellow_exit_y() + head_way[Head_Direction][1];
+ 
         map[stage_num][snake[snake.size()-1].y][snake[snake.size()-1].x] = 0;
         snake.pop_back();
         snake.insert(snake.begin(), snakepart(game->gate_posX, game->gate_posY));
@@ -145,13 +146,13 @@ int Snake::move_Snake(){
     // 파란 gate
     else if(map[stage_num][move_posY][move_posX] == 11 && game->collision_gate() == 11){
         Head_Direction = game->pass_the_blue_gate();
-        game->gate_posX = get_blue_exit_x() + head_way[Head_Direction][0];     // 자유 함수
-        game->gate_posY = get_blue_exit_y() + head_way[Head_Direction][1];
-
+        game->gate_posX = game->get_blue_exit_x() + head_way[Head_Direction][0];
+        game->gate_posY = game->get_blue_exit_y() + head_way[Head_Direction][1];
+ 
         snake.insert(snake.begin(), snakepart(game->gate_posX, game->gate_posY));
         map[stage_num][snake[0].y][snake[0].x] = 3;
         map[stage_num][snake[1].y][snake[1].x] = 4;
-
+ 
         Growth_item += 1;
         refresh();
     }
