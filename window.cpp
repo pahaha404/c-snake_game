@@ -129,19 +129,19 @@ void SnakeGame::NEXTGAME(const int num){
   if(num == 1){
     mvwprintw(win1, 10, 24, "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★");
     mvwprintw(win1, 11, 24, "★      STAGE CLEAR      ★");
-    mvwprintw(win1, 12, 24, "★        ٩( ᐛ )و        ★");
+    mvwprintw(win1, 12, 24, "★        ~~~~~>o         ★");
     mvwprintw(win1, 13, 24, "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★");
   }
   else if(num == 2){
     mvwprintw(win1, 10, 24, "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★");
     mvwprintw(win1, 11, 24, "★     STAGE ALL CLEAR   ★");
-    mvwprintw(win1, 12, 24, "★       ( ღ 'ᴗ'ღ )      ★");
+    mvwprintw(win1, 12, 24, "★        ~~~~~>o         ★");
     mvwprintw(win1, 13, 24, "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★");
   }
   else if(num == 3){
     mvwprintw(win1, 10, 28, "+ - - - - - - - - - - - +");
     mvwprintw(win1, 11, 28, "|    G A M E O V E R    |");
-    mvwprintw(win1, 12, 28, "|        ( ಥ﹏ಥ)        |");
+    mvwprintw(win1, 12, 28, "|       ~~~~~>o         |");
     mvwprintw(win1, 13, 28, "+ - - - - - - - - - - - +");
   }
   wrefresh(win1);

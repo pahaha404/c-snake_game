@@ -36,11 +36,16 @@ void SnakeGame::game(){
 
             start = time(NULL);
             while(true){
-                Head_Direction = snake_obj.set_Head_Direction();   // ★
-                Head_Direction = snake_obj.move_Snake();           // ★
+                // 한 프레임마다 입력 방향을 갱신한 뒤 실제 뱀 이동과 충돌 처리를 수행합니다.
+                Head_Direction = snake_obj.set_Head_Direction();
+                Head_Direction = snake_obj.move_Snake();
+
+                // 이동 결과를 화면과 점수판에 반영하고, 현재 스테이지를 속도 단계로 표시합니다.
                 color();
                 current_speed_level = stage_num + 1;
                 score();
+
+                // 스테이지가 올라갈수록 프레임 지연 시간을 줄여 난이도를 높입니다.
                 const int base_delay = 400000;
                 const int speed_up   = stage_num * 40000;
                 int final_delay = base_delay - speed_up;
@@ -48,6 +53,7 @@ void SnakeGame::game(){
                 usleep(final_delay);
                 end = time(NULL);
 
+                // 제한 시간이 지나면 다음 스테이지로 넘어가도록 플래그를 세우고 루프를 종료합니다.
                 if(end - start >= 15){
                     stage_num++;
                     stage_flag = 1;

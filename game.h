@@ -36,7 +36,7 @@ public:
     int gate_posY;
     int stage_num;
     int stage_flag;
-    int current_speed_level;
+    int current_speed_level; // 현재 스피드 레벨 저장용 변수
     int High_Score; // 최고 점수 저장용 변수
 
     vector<snakepart> gate;
@@ -44,7 +44,8 @@ public:
 
     Snake snake_obj;
 
-    // alias: gate.cpp/item.cpp가 이전 이름으로 접근 가능
+    // Snake 객체가 실제로 소유한 상태를 SnakeGame에서도 기존 멤버처럼 접근하기 위한 참조 alias입니다.
+    // 복사본이 아니므로 아래 변수들을 수정하면 snake_obj 내부 상태가 그대로 변경됩니다.
     int&               Head_Direction = snake_obj.Head_Direction;
     int&               Body_length    = snake_obj.Body_length;
     int&               Growth_item    = snake_obj.Growth_item;
@@ -69,6 +70,7 @@ public:
             infile.close();
         }
 
+        // Snake가 게이트, 스테이지, 게임오버 화면처럼 SnakeGame의 기능을 호출할 수 있도록 현재 객체를 연결합니다.
         snake_obj.bind(this);
     }
 
