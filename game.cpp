@@ -11,10 +11,10 @@
 void SnakeGame::game(){
     while(true){
         time_t start, end;
-        Head_Direction = 1;                  // alias 덕분에 그대로 동작
+        Head_Direction = 1;                 
         set_zero();
         color();
-        snake_obj.make_snake();              // ★
+        snake_obj.make_snake();         
 
         nodelay(stdscr, true);
         while(true){
@@ -53,7 +53,7 @@ void SnakeGame::game(){
                 usleep(final_delay);
                 end = time(NULL);
 
-                // 제한 시간이 지나면 다음 스테이지로 넘어가도록 플래그를 세우고 루프를 종료합니다.
+                
                 if(end - start >= 15){
                     stage_num++;
                     stage_flag = 1;
