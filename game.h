@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <time.h>
 #include <string>
+#include <fstream>
 #include "map.h"
 #include "snake.h"      
 #include "gate.h"       
@@ -32,6 +33,7 @@ public:
     int stage_num;
     int stage_flag;
     int current_speed_level;
+    int High_Score; // 최고 점수 저장용 변수
 
     vector<snakepart> gate;
     vector<snakepart> blue_gate;
@@ -42,6 +44,9 @@ public:
     Gate blue_gate_obj;     // 파란 게이트 (cell_value = 11)
 
     int  active_gate_color; // 통과 중인 게이트: 1=노란, 2=파란, 0=없음
+
+    bool visited[30][30];
+    bool easter_egg_eligible;
 
     // alias: gate.cpp/item.cpp가 이전 이름으로 접근 가능
     int& Head_Direction = snake_obj.Head_Direction;
@@ -63,6 +68,14 @@ public:
         gate_posX = 0; gate_posY = 0;
         stage_num = 0; stage_flag = 0;
         current_speed_level = 1;
+
+        // 파일로부터 최고 점수 불러오기
+        High_Score = 0;
+        ifstream infile("highscore.txt");
+        if (infile.is_open()) {
+            infile >> High_Score;
+            infile.close();
+        }
 
         snake_obj.bind(this);
     }

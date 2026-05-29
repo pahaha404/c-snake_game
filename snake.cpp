@@ -43,6 +43,7 @@ void Snake::make_snake() {
             snake_location[game->stage_num][a][0]));
 
     map[game->stage_num][snake[0].y][snake[0].x] = 3;
+    game->visited[snake[0].y][snake[0].x] = true;
     for (int i = 1; i < 4; i++)
         map[game->stage_num][snake[i].y][snake[i].x] = 4;
     refresh();
@@ -126,6 +127,12 @@ int Snake::move_Snake() {
         exit(0);
     }
 
+    // 이스터에그: 이미 가본 타일인지 체크하고 방문 표기
+    if (game->visited[move_posY][move_posX]) {
+        game->easter_egg_eligible = false;
+    }
+    game->visited[move_posY][move_posX] = true;
+
     // Growth Item(5): 머리만 추가하고 꼬리는 자르지 않아 길이 +1.
     if (map[stage_num][move_posY][move_posX] == 5) {
         Growth_item += 1;
@@ -185,6 +192,14 @@ int Snake::move_Snake() {
         game->gate_posX = game->get_yellow_exit_x() + head_way[Head_Direction][0];
         game->gate_posY = game->get_yellow_exit_y() + head_way[Head_Direction][1];
 
+        // 이스터에그: 게이트 탈출 출구 좌표 방문 검사 및 마크
+        if (game->gate_posX >= 0 && game->gate_posX < 30 && game->gate_posY >= 0 && game->gate_posY < 30) {
+            if (game->visited[game->gate_posY][game->gate_posX]) {
+                game->easter_egg_eligible = false;
+            }
+            game->visited[game->gate_posY][game->gate_posX] = true;
+        }
+
         map[stage_num][snake[snake.size() - 1].y][snake[snake.size() - 1].x] = 0;
         snake.pop_back();
         snake.insert(snake.begin(), snakepart(game->gate_posX, game->gate_posY));
@@ -197,6 +212,14 @@ int Snake::move_Snake() {
         Head_Direction = game->pass_the_blue_gate();
         game->gate_posX = game->get_blue_exit_x() + head_way[Head_Direction][0];
         game->gate_posY = game->get_blue_exit_y() + head_way[Head_Direction][1];
+
+        // 이스터에그: 게이트 탈출 출구 좌표 방문 검사 및 마크
+        if (game->gate_posX >= 0 && game->gate_posX < 30 && game->gate_posY >= 0 && game->gate_posY < 30) {
+            if (game->visited[game->gate_posY][game->gate_posX]) {
+                game->easter_egg_eligible = false;
+            }
+            game->visited[game->gate_posY][game->gate_posX] = true;
+        }
 
         snake.insert(snake.begin(), snakepart(game->gate_posX, game->gate_posY));
         map[stage_num][snake[0].y][snake[0].x] = 3;

@@ -12,8 +12,9 @@
 #ifndef GOLDENAPPLE_H
 #define GOLDENAPPLE_H
 
-// 확률 게이트를 통과하는 사이클에 한해 현재 스테이지의 빈칸에 Golden Apple
-// (셀 값 9) 을 배치한다. 게이트 통과에 실패하면 즉시 반환한다.
-void generate_golden_apple(int stage_num);
+class GoldenApple {
+public:
+    void generate(int stage_num);
+};
 
 #endif

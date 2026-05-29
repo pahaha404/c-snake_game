@@ -62,36 +62,47 @@ void SnakeGame::score() {
     int goal[4][4] = { {5, 2, 1, 1}, {10, 4, 2, 2}, {15, 6, 4, 3}, {15, 6, 5, 4} };
     // 목표 점수 표시
     wborder(win2, '|', '|', '-', '-', '+', '+', '+', '+');
-    mvwprintw(win2, 1, 6, "*Mission*");
-    mvwprintw(win2, 3, 8, "B : %d", goal[stage_num][0]);
-    mvwprintw(win2, 5, 8, "+ : %d", goal[stage_num][1]);
-    mvwprintw(win2, 7, 8, "- : %d", goal[stage_num][2]);
-    mvwprintw(win2, 9, 8, "G : %d", goal[stage_num][3]);
-    mvwprintw(win3, 11, 2, "SPEED :    %d", current_speed_level);
+    mvwprintw(win2, 1, 7, "*Mission*");
+    mvwprintw(win2, 3, 3, "Body   : %d", goal[stage_num][0]);
+    mvwprintw(win2, 5, 3, "Growth : %d", goal[stage_num][1]);
+    mvwprintw(win2, 7, 3, "Poison : %d", goal[stage_num][2]);
+    mvwprintw(win2, 9, 3, "Gate   : %d", goal[stage_num][3]);
+    mvwprintw(win3, 11, 2, "Speed  : %d", current_speed_level);
 
     int size = snake.size();
     int current_size = snake.size();
     Body_length = max(size, Body_length); // max_size
 
+    // 최고 점수 갱신 및 파일 저장
+    if (Body_length > High_Score) {
+        High_Score = Body_length;
+        ofstream outfile("highscore.txt");
+        if (outfile.is_open()) {
+            outfile << High_Score;
+            outfile.close();
+        }
+    }
+
     // 점수 표시
     wborder(win3, '|', '|', '-', '-', '+', '+', '+', '+');
-    mvwprintw(win3, 1, 7, "*Score*");
-    mvwprintw(win3, 3, 2, "B : %d / %d", current_size, Body_length);
-    mvwprintw(win3, 5, 2, "+ :   %d   ", Growth_item);
-    mvwprintw(win3, 7, 2, "- :   %d   ", Poison_item);
-    mvwprintw(win3, 9, 2, "G :   %d   ", Gate_cnt);
+    mvwprintw(win3, 1, 8, "*Score*");
+    mvwprintw(win3, 3, 2, "Body   : %d / %d", current_size, Body_length);
+    mvwprintw(win3, 5, 2, "Growth : %d", Growth_item);
+    mvwprintw(win3, 7, 2, "Poison : %d", Poison_item);
+    mvwprintw(win3, 9, 2, "Gate   : %d", Gate_cnt);
+    mvwprintw(win3, 10, 2, "High Score : %d", High_Score); // 최고 점수 표시 추가
 
-    if (Body_length < goal[stage_num][0])  mvwprintw(win3, 3, 14, "(   )");
-    else  mvwprintw(win3, 3, 14, "( V )");
+    if (Body_length < goal[stage_num][0])  mvwprintw(win3, 3, 17, "(   )");
+    else  mvwprintw(win3, 3, 17, "( V )");
 
-    if (Growth_item < goal[stage_num][1])  mvwprintw(win3, 5, 14, "(   )");
-    else  mvwprintw(win3, 5, 14, "( V )");
+    if (Growth_item < goal[stage_num][1])  mvwprintw(win3, 5, 17, "(   )");
+    else  mvwprintw(win3, 5, 17, "( V )");
 
-    if (Poison_item < goal[stage_num][2])  mvwprintw(win3, 7, 14, "(   )");
-    else  mvwprintw(win3, 7, 14, "( V )");
+    if (Poison_item < goal[stage_num][2])  mvwprintw(win3, 7, 17, "(   )");
+    else  mvwprintw(win3, 7, 17, "( V )");
 
-    if (Gate_cnt < goal[stage_num][3]) mvwprintw(win3, 9, 14, "(   )");
-    else  mvwprintw(win3, 9, 14, "( V )");
+    if (Gate_cnt < goal[stage_num][3]) mvwprintw(win3, 9, 17, "(   )");
+    else  mvwprintw(win3, 9, 17, "( V )");
 
     if ((Body_length >= goal[stage_num][0]) && (Growth_item >= goal[stage_num][1]) &&
         (Poison_item >= goal[stage_num][2]) && (Gate_cnt >= goal[stage_num][3])) {
@@ -115,27 +126,45 @@ void SnakeGame::set_zero() {
     Reverse_active = 0;
     key_to_dir[0] = 0; key_to_dir[1] = 1;
     key_to_dir[2] = 2; key_to_dir[3] = 3;
+
+    // 이스터에그: 갔던 길 안 가고 깼는지 체크를 위해 방문 기록 초기화
+    for (int i = 0; i < 30; i++) {
+        for (int j = 0; j < 30; j++) {
+            visited[i][j] = false;
+        }
+    }
+    easter_egg_eligible = true;
 }
 
 void SnakeGame::NEXTGAME(int num) {
     wclear(win1);
     if (num == 1) {
-        mvwprintw(win1, 10, 24, "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★");
-        mvwprintw(win1, 11, 24, "★      STAGE CLEAR      ★");
-        mvwprintw(win1, 12, 24, "★        ٩( ᐛ )و        ★");
-        mvwprintw(win1, 13, 24, "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★");
+        if (easter_egg_eligible) {
+            mvwprintw(win1, 10, 3, "========================");
+            mvwprintw(win1, 11, 3, "||   ★ EASTER EGG ★   ||");
+            mvwprintw(win1, 12, 3, "||   UNTOUCHED PATH!  ||");
+            mvwprintw(win1, 13, 3, "||     ( つ•̀ω•́)つ     ||");
+            mvwprintw(win1, 14, 3, "||    GOD OF SNAKE!   ||");
+            mvwprintw(win1, 15, 3, "========================");
+        }
+        else {
+            mvwprintw(win1, 11, 3, "========================");
+            mvwprintw(win1, 12, 3, "||    STAGE CLEAR!    ||");
+            mvwprintw(win1, 13, 3, "||      ٩( ᐛ )و       ||");
+            mvwprintw(win1, 14, 3, "========================");
+        }
     }
     else if (num == 2) {
-        mvwprintw(win1, 10, 24, "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★");
-        mvwprintw(win1, 11, 24, "★     STAGE ALL CLEAR   ★");
-        mvwprintw(win1, 12, 24, "★       ( ღ 'ᴗ'ღ )      ★");
-        mvwprintw(win1, 13, 24, "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★");
+        mvwprintw(win1, 11, 3, "========================");
+        mvwprintw(win1, 12, 3, "||  ALL STAGE CLEAR!  ||");
+        mvwprintw(win1, 13, 3, "||     ( ღ 'ᴗ'ღ )     ||");
+        mvwprintw(win1, 14, 3, "========================");
     }
     else if (num == 3) {
-        mvwprintw(win1, 10, 28, "+ - - - - - - - - - - - +");
-        mvwprintw(win1, 11, 28, "|    G A M E O V E R    |");
-        mvwprintw(win1, 12, 28, "|        ( ಥ﹏ಥ)        |");
-        mvwprintw(win1, 13, 28, "+ - - - - - - - - - - - +");
+        mvwprintw(win1, 11, 3, "========================");
+        mvwprintw(win1, 12, 3, "||     GAME OVER      ||");
+        mvwprintw(win1, 13, 3, "||      ( ಥ﹏ಥ)       ||");
+        mvwprintw(win1, 14, 3, "========================");
     }
     wrefresh(win1);
     nodelay(stdscr, false);

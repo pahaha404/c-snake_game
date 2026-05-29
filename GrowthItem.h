@@ -10,8 +10,9 @@
 #ifndef GROWTHITEM_H
 #define GROWTHITEM_H
 
-// 현재 스테이지의 빈칸 한 곳에 Growth Item 을 배치한다.
-// 호출자가 사전에 srand() 로 시드를 설정한 상태여야 한다.
-void generate_growth_item(int stage_num);
+class GrowthItem {
+public:
+    void generate(int stage_num);
+};
 
 #endif

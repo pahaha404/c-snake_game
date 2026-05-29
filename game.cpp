@@ -32,10 +32,18 @@ void SnakeGame::game() {
             // 확률 게이트로 등장 빈도를 낮추고, Reverse Item 은 stage_num 가드로
             // 3 스테이지부터만 실제 배치된다.
             srand((unsigned)time(0));
-            generate_growth_item(stage_num);
-            generate_poison_item(stage_num);
-            generate_reverse_item(stage_num);
-            generate_golden_apple(stage_num);
+            GrowthItem growth_item;
+            growth_item.generate(stage_num);
+
+            PoisonItem poison_item;
+            poison_item.generate(stage_num);
+
+            ReverseItem reverse_item;
+            reverse_item.generate(stage_num);
+
+            GoldenApple golden_apple;
+            golden_apple.generate(stage_num);
+
             generate_gate();
             color();
 
@@ -53,9 +61,9 @@ void SnakeGame::game() {
                 usleep(final_delay);
                 end = time(NULL);
 
+                if (stage_flag == 1) break;
+
                 if (end - start >= 15) {
-                    stage_num++;
-                    stage_flag = 1;
                     break;
                 }
             }

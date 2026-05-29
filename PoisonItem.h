@@ -9,8 +9,9 @@
 #ifndef POISONITEM_H
 #define POISONITEM_H
 
-// 현재 스테이지의 빈칸 한 곳에 Poison Item 을 배치한다.
-// Growth Item 과 같은 자리에 겹치지 않는 것은 빈칸(!= 0) 검사로 보장된다.
-void generate_poison_item(int stage_num);
+class PoisonItem {
+public:
+    void generate(int stage_num);
+};
 
 #endif

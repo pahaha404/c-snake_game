@@ -8,7 +8,7 @@
 #include "map.h"
 #include <cstdlib>
 
-void generate_poison_item(int stage_num) {
+void PoisonItem::generate(int stage_num) {
     int px, py;
     do {
         px = rand() % 30;

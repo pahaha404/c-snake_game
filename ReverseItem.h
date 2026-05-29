@@ -12,8 +12,9 @@
 #ifndef REVERSEITEM_H
 #define REVERSEITEM_H
 
-// 3 스테이지 이상인 경우에만 빈칸에 Reverse Item 을 배치한다.
-// 그 이전 스테이지에서는 아무 일도 하지 않고 즉시 반환한다.
-void generate_reverse_item(int stage_num);
+class ReverseItem {
+public:
+    void generate(int stage_num);
+};
 
 #endif

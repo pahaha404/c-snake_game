@@ -9,7 +9,7 @@
 #include "map.h"
 #include <cstdlib>
 
-void generate_reverse_item(int stage_num) {
+void ReverseItem::generate(int stage_num) {
     // stage_num 은 0-기반이므로 "3 스테이지부터" 는 >= 2 조건으로 표현된다.
     if (stage_num < 2) return;
 
