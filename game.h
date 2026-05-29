@@ -25,8 +25,6 @@ using namespace std;
 #define COLOR_GRAY 8
 #define COLOR_BLACK_A 9
 
-// snakepart, head_way 는 snake.h로 이동했으므로 여기서 제거
-
 class SnakeGame {
 public:
     WINDOW *win1, *win2, *win3;
@@ -45,7 +43,6 @@ public:
     Snake snake_obj;
 
     // Snake 객체가 실제로 소유한 상태를 SnakeGame에서도 기존 멤버처럼 접근하기 위한 참조 alias입니다.
-    // 복사본이 아니므로 아래 변수들을 수정하면 snake_obj 내부 상태가 그대로 변경됩니다.
     int&               Head_Direction = snake_obj.Head_Direction;
     int&               Body_length    = snake_obj.Body_length;
     int&               Growth_item    = snake_obj.Growth_item;
@@ -80,12 +77,6 @@ public:
     void set_zero();
     void del_win();
 
-    // 스네이크 3종은 Snake로 이전 → 선언 제거
-    // void make_snake();
-    // int  set_Head_Direction();
-    // int  move_Snake();
-
-    // 아이템 (그대로 유지)
     void generate_item();
 
     
