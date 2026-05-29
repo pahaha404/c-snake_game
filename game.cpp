@@ -21,8 +21,12 @@ void SnakeGame::game(){
             gate.clear();
             blue_gate.clear();
             refresh();
-
-            generate_item();
+            //generate_item(); 변경
+            srand((unsigned)time(0));
+            generate_growth_item(stage_num);
+            generate_poison_item(stage_num);
+            generate_reverse_item(stage_num);
+            //고침
             generate_gate();
             color();
 

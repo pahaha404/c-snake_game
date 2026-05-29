@@ -10,6 +10,9 @@
 #include "map.h"
 #include "snake.h"      
 #include "gate.h"       
+#include "GrowthItem.h"
+#include "PoisonItem.h"
+#include "ReverseItem.h"
 
 using namespace std;
 
@@ -20,7 +23,7 @@ using namespace std;
 
 class SnakeGame {
 public:
-    WINDOW *win1, *win2, *win3;
+    WINDOW* win1, * win2, * win3;
 
     int Gate_cnt;
     int gate_posX;
@@ -40,14 +43,14 @@ public:
     int  active_gate_color; // 통과 중인 게이트: 1=노란, 2=파란, 0=없음
 
     // alias: gate.cpp/item.cpp가 이전 이름으로 접근 가능
-    int&               Head_Direction = snake_obj.Head_Direction;
-    int&               Body_length    = snake_obj.Body_length;
-    int&               Growth_item    = snake_obj.Growth_item;
-    int&               Poison_item    = snake_obj.Poison_item;
-    int&               Reverse_active = snake_obj.Reverse_active;
-    time_t&            Reverse_start  = snake_obj.Reverse_start;
-    int              (&key_to_dir)[4] = snake_obj.key_to_dir;
-    vector<snakepart>& snake          = snake_obj.snake;
+    int& Head_Direction = snake_obj.Head_Direction;
+    int& Body_length = snake_obj.Body_length;
+    int& Growth_item = snake_obj.Growth_item;
+    int& Poison_item = snake_obj.Poison_item;
+    int& Reverse_active = snake_obj.Reverse_active;
+    time_t& Reverse_start = snake_obj.Reverse_start;
+    int(&key_to_dir)[4] = snake_obj.key_to_dir;
+    vector<snakepart>& snake = snake_obj.snake;
 
     SnakeGame() 
         : yellow_gate(CELL_GATE),
@@ -74,10 +77,6 @@ public:
     // int  set_Head_Direction();
     // int  move_Snake();
 
-    // 아이템 (그대로 유지)
-    void generate_item();
-
-    
     int  collision_gate();
     void generate_gate();
     int  pass_the_gate();
@@ -93,4 +92,3 @@ public:
     void NEXTGAME(int num);
     void game();
 };
-
