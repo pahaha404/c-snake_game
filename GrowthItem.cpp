@@ -5,7 +5,7 @@
 // 거부 표본추출(rejection sampling) 방식으로 빈칸을 골라 셀 값 5 를 둔다.
 // =============================================================================
 #include "GrowthItem.h"
-#include "map.h"
+#include "board.h"
 #include <cstdlib>
 
 void GrowthItem::generate(int stage_num) {

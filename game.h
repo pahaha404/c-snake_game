@@ -16,7 +16,7 @@
 #include <time.h>
 #include <string>
 #include <fstream>
-#include "map.h"
+#include "board.h"
 #include "snake.h"      
 #include "gate.h"       
 #include "GrowthItem.h"
