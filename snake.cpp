@@ -45,16 +45,15 @@ void Snake::make_snake(){
     // 스테이지를 넘기는 순간 끊는다.
     pending_growth = 0;
 
-    // 후보 중 하나를 무작위로 선택한 뒤 길이 4의 초기 뱀을 가로 방향으로 배치합니다.
+    // 후보 중 하나를 무작위로 선택한 뒤 길이 3의 초기 뱀을 가로 방향으로 배치합니다.
     srand((unsigned) time(0));
     int a = rand()%3;
-    for(int i=0; i<4; i++)
+    for(int i=0; i<3; i++)
         snake.push_back(snakepart(snake_location[game->stage_num][a][1]+i,
                                   snake_location[game->stage_num][a][0]));
-
     map[game->stage_num][snake[0].y][snake[0].x] = 3;
     game->visited[snake[0].y][snake[0].x] = true;
-    for (int i = 1; i < 4; i++)
+    for (int i = 1; i < 3; i++)
         map[game->stage_num][snake[i].y][snake[i].x] = 4;
     refresh();
     game->color();
@@ -193,6 +192,7 @@ int Snake::move_Snake() {
     //   세 칸이 같은 좌표에 겹치지 않고 진행하면서 자연스럽게 누적된다.
     else if (map[stage_num][move_posY][move_posX] == 9) {
         pending_growth += 2;
+        Growth_item += 3; // 황금사과를 먹었을 때 성장 점수(+) 카운트도 대폭 +3 일시 가산!
 
         snake.insert(snake.begin(), snakepart(move_posX, move_posY));
         map[stage_num][snake[0].y][snake[0].x] = 3;
@@ -218,6 +218,8 @@ int Snake::move_Snake() {
         snake.insert(snake.begin(), snakepart(game->gate_posX, game->gate_posY));
         map[stage_num][snake[0].y][snake[0].x] = 3;
         map[stage_num][snake[1].y][snake[1].x] = 4;
+        
+        game->Gate_cnt += 1; // 실시간 가산: 노란 게이트 진입 즉시 G 카운트 상승!
         refresh();
     }
     // 파란 gate
@@ -239,6 +241,7 @@ int Snake::move_Snake() {
         map[stage_num][snake[1].y][snake[1].x] = 4;
 
         Growth_item += 1;
+        game->Gate_cnt += 1; // 실시간 가산: 파란 게이트 진입 즉시 G 카운트 상승!
         refresh();
     }
     else if (map[stage_num][move_posY][move_posX] == 1 ||

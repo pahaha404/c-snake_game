@@ -13,6 +13,7 @@ void SnakeGame::game() {
         time_t start, end;
         Head_Direction = 1;                 
         set_zero();
+        stage_start_time = time(NULL);
         color();
         snake_obj.make_snake();         
 

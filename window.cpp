@@ -65,17 +65,22 @@ void SnakeGame::color() {
     wrefresh(win1);
 }
 
-void SnakeGame::score(){
-  // Body_length, Growth_item, Poison_item, Gate_cnt
-  const int goal[4][4] = {{5, 2, 1, 1}, {10, 4, 2, 2}, {15, 6, 4, 3}, {15, 6, 5, 4}};
-  // 목표 점수 표시
-  wborder(win2, '|', '|', '-', '-', '+', '+', '+', '+');
-  mvwprintw(win2, 1, 6, "*Mission*");
-  mvwprintw(win2, 3, 8, "B : %d", goal[stage_num][0]);
-  mvwprintw(win2, 5, 8, "+ : %d", goal[stage_num][1]);
-  mvwprintw(win2, 7, 8, "- : %d", goal[stage_num][2]);
-  mvwprintw(win2, 9, 8, "G : %d", goal[stage_num][3]);
-  mvwprintw(win3, 11, 2, "SPEED :    %d", current_speed_level); // 스코어보드에 speed 추가
+void SnakeGame::score() {
+    // Body_length, Growth_item, Poison_item, Gate_cnt
+    int goal[4][4] = {
+        {5, 2, 1, 1},   // Stage 1 (길이 5)
+        {6, 3, 1, 1},   // Stage 2 (길이 6 - 아주 깔끔하고 부담 없는 난이도!)
+        {7, 4, 2, 2},   // Stage 3 (길이 7)
+        {8, 5, 3, 3}    // Stage 4 (길이 8 - 최종 보스전!)
+    };
+    // 목표 점수 표시
+    wborder(win2, '|', '|', '-', '-', '+', '+', '+', '+');
+    mvwprintw(win2, 1, 6, "*Mission*");
+    mvwprintw(win2, 3, 8, "B : %d", goal[stage_num][0]);
+    mvwprintw(win2, 5, 8, "+ : %d", goal[stage_num][1]);
+    mvwprintw(win2, 7, 8, "- : %d", goal[stage_num][2]);
+    mvwprintw(win2, 9, 8, "G : %d", goal[stage_num][3]);
+    mvwprintw(win3, 11, 2, "SPEED :    %d", current_speed_level);
 
     int size = snake.size();
     int current_size = snake.size();
@@ -100,26 +105,20 @@ void SnakeGame::score(){
   mvwprintw(win3, 9, 2, "G :   %d   ", Gate_cnt);
   mvwprintw(win3, 10, 2, "H :   %d   ", High_Score); // 최고 점수 표시 추가
 
-    // 점수 표시
-    wborder(win3, '|', '|', '-', '-', '+', '+', '+', '+');
-    mvwprintw(win3, 1, 8, "*Score*");
-    mvwprintw(win3, 3, 2, "Body   : %d / %d", current_size, Body_length);
-    mvwprintw(win3, 5, 2, "Growth : %d", Growth_item);
-    mvwprintw(win3, 7, 2, "Poison : %d", Poison_item);
-    mvwprintw(win3, 9, 2, "Gate   : %d", Gate_cnt);
-    mvwprintw(win3, 10, 2, "High Score : %d", High_Score); // 최고 점수 표시 추가
+    int elapsed_seconds = (int)(time(NULL) - stage_start_time);
+    mvwprintw(win3, 12, 2, "TIME  :    %d s", elapsed_seconds);
 
-    if (Body_length < goal[stage_num][0])  mvwprintw(win3, 3, 17, "(   )");
-    else  mvwprintw(win3, 3, 17, "( V )");
+    if (Body_length < goal[stage_num][0])  mvwprintw(win3, 3, 14, "(   )");
+    else  mvwprintw(win3, 3, 14, "( V )");
 
-    if (Growth_item < goal[stage_num][1])  mvwprintw(win3, 5, 17, "(   )");
-    else  mvwprintw(win3, 5, 17, "( V )");
+    if (Growth_item < goal[stage_num][1])  mvwprintw(win3, 5, 14, "(   )");
+    else  mvwprintw(win3, 5, 14, "( V )");
 
-    if (Poison_item < goal[stage_num][2])  mvwprintw(win3, 7, 17, "(   )");
-    else  mvwprintw(win3, 7, 17, "( V )");
+    if (Poison_item < goal[stage_num][2])  mvwprintw(win3, 7, 14, "(   )");
+    else  mvwprintw(win3, 7, 14, "( V )");
 
-    if (Gate_cnt < goal[stage_num][3]) mvwprintw(win3, 9, 17, "(   )");
-    else  mvwprintw(win3, 9, 17, "( V )");
+    if (Gate_cnt < goal[stage_num][3]) mvwprintw(win3, 9, 14, "(   )");
+    else  mvwprintw(win3, 9, 14, "( V )");
 
     if ((Body_length >= goal[stage_num][0]) && (Growth_item >= goal[stage_num][1]) &&
         (Poison_item >= goal[stage_num][2]) && (Gate_cnt >= goal[stage_num][3])) {

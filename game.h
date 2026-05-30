@@ -53,6 +53,7 @@ public:
 
     bool visited[30][30];
     bool easter_egg_eligible;
+    time_t stage_start_time;
 
     // alias: gate.cpp/item.cpp가 이전 이름으로 접근 가능
     int& Head_Direction = snake_obj.Head_Direction;

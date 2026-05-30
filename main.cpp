@@ -26,8 +26,8 @@ int main() {
   }
 
   snakeGame.win1 = newwin(30, 30, 1, 2);
-  snakeGame.win2 = newwin(12, 23, 1, 35);
-  snakeGame.win3 = newwin(13, 23, 14, 35);
+  snakeGame.win2 = newwin(12, 20, 1, 35);
+  snakeGame.win3 = newwin(14, 20, 14, 35);
 
   refresh();
   snakeGame.game();
