@@ -6,7 +6,7 @@
 // 에서만 빈칸에 셀 값 9 를 둔다.
 // =============================================================================
 #include "GoldenApple.h"
-#include "map.h"
+#include "board.h"
 #include <cstdlib>
 
 void GoldenApple::generate(int stage_num) {

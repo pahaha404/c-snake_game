@@ -1,3 +1,11 @@
+/**
+ * @file window.cpp
+ * @brief NCURSES 화면 렌더링 및 점수판 관리 구현 파일
+ * @details 게임 화면(win1), 미션 현황(win2), 그리고 현재/최고 점수판(win3)의
+ *          그리기 기능, 색상 초기화 및 화면 전환 애니메이션을 관리합니다.
+ * @author Hansol
+ * @date 2026-05-28
+ */
 #include "game.h"
 
 // Golden Apple 전용 커스텀 색 슬롯. 8(GRAY), 9(BLACK_A) 는 game.h 에서 사용 중.
@@ -57,31 +65,40 @@ void SnakeGame::color() {
     wrefresh(win1);
 }
 
-void SnakeGame::score() {
-    // Body_length, Growth_item, Poison_item, Gate_cnt
-    int goal[4][4] = { {5, 2, 1, 1}, {10, 4, 2, 2}, {15, 6, 4, 3}, {15, 6, 5, 4} };
-    // 목표 점수 표시
-    wborder(win2, '|', '|', '-', '-', '+', '+', '+', '+');
-    mvwprintw(win2, 1, 7, "*Mission*");
-    mvwprintw(win2, 3, 3, "Body   : %d", goal[stage_num][0]);
-    mvwprintw(win2, 5, 3, "Growth : %d", goal[stage_num][1]);
-    mvwprintw(win2, 7, 3, "Poison : %d", goal[stage_num][2]);
-    mvwprintw(win2, 9, 3, "Gate   : %d", goal[stage_num][3]);
-    mvwprintw(win3, 11, 2, "Speed  : %d", current_speed_level);
+void SnakeGame::score(){
+  // Body_length, Growth_item, Poison_item, Gate_cnt
+  const int goal[4][4] = {{5, 2, 1, 1}, {10, 4, 2, 2}, {15, 6, 4, 3}, {15, 6, 5, 4}};
+  // 목표 점수 표시
+  wborder(win2, '|', '|', '-', '-', '+', '+', '+', '+');
+  mvwprintw(win2, 1, 6, "*Mission*");
+  mvwprintw(win2, 3, 8, "B : %d", goal[stage_num][0]);
+  mvwprintw(win2, 5, 8, "+ : %d", goal[stage_num][1]);
+  mvwprintw(win2, 7, 8, "- : %d", goal[stage_num][2]);
+  mvwprintw(win2, 9, 8, "G : %d", goal[stage_num][3]);
+  mvwprintw(win3, 11, 2, "SPEED :    %d", current_speed_level); // 스코어보드에 speed 추가
 
     int size = snake.size();
     int current_size = snake.size();
     Body_length = max(size, Body_length); // max_size
 
-    // 최고 점수 갱신 및 파일 저장
-    if (Body_length > High_Score) {
-        High_Score = Body_length;
-        ofstream outfile("highscore.txt");
-        if (outfile.is_open()) {
-            outfile << High_Score;
-            outfile.close();
-        }
-    }
+  // 최고 점수 갱신 및 파일 저장
+  if (Body_length > High_Score) {
+      High_Score = Body_length;
+      ofstream outfile("highscore.txt");
+      if (outfile.is_open()) {
+          outfile << High_Score;
+          outfile.close();
+      }
+  }
+
+  // 점수 표시
+  wborder(win3, '|', '|', '-', '-', '+', '+', '+', '+');
+  mvwprintw(win3, 1, 7, "*Score*");
+  mvwprintw(win3, 3, 2, "B : %d / %d", current_size, Body_length);  // current / max
+  mvwprintw(win3, 5, 2, "+ :   %d   ", Growth_item);
+  mvwprintw(win3, 7, 2, "- :   %d   ", Poison_item);
+  mvwprintw(win3, 9, 2, "G :   %d   ", Gate_cnt);
+  mvwprintw(win3, 10, 2, "H :   %d   ", High_Score); // 최고 점수 표시 추가
 
     // 점수 표시
     wborder(win3, '|', '|', '-', '-', '+', '+', '+', '+');
@@ -150,20 +167,20 @@ void SnakeGame::NEXTGAME(int num) {
         else {
             mvwprintw(win1, 11, 3, "========================");
             mvwprintw(win1, 12, 3, "||    STAGE CLEAR!    ||");
-            mvwprintw(win1, 13, 3, "||      ٩( ᐛ )و       ||");
+            mvwprintw(win1, 13, 3, "||      \\(^o^)/       ||");
             mvwprintw(win1, 14, 3, "========================");
         }
     }
     else if (num == 2) {
         mvwprintw(win1, 11, 3, "========================");
         mvwprintw(win1, 12, 3, "||  ALL STAGE CLEAR!  ||");
-        mvwprintw(win1, 13, 3, "||     ( ღ 'ᴗ'ღ )     ||");
+        mvwprintw(win1, 13, 3, "||     *(ﾉ>ω<)ﾉ :*    ||");
         mvwprintw(win1, 14, 3, "========================");
     }
     else if (num == 3) {
         mvwprintw(win1, 11, 3, "========================");
         mvwprintw(win1, 12, 3, "||     GAME OVER      ||");
-        mvwprintw(win1, 13, 3, "||      ( ಥ﹏ಥ)       ||");
+        mvwprintw(win1, 13, 3, "||      ( x_x )       ||");
         mvwprintw(win1, 14, 3, "========================");
     }
     wrefresh(win1);

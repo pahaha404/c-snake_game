@@ -6,7 +6,7 @@
 // 3~4 스테이지부터 등장시켜 후반 난이도 상승 요소로 활용한다.
 // =============================================================================
 #include "ReverseItem.h"
-#include "map.h"
+#include "board.h"
 #include <cstdlib>
 
 void ReverseItem::generate(int stage_num) {

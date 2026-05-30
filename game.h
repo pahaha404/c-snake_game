@@ -1,3 +1,11 @@
+/**
+ * @file game.h
+ * @brief Snake Game의 메인 제어 클래스(SnakeGame) 정의 헤더
+ * @details 전체 게임 루프 조율, NCURSES 윈도우 인스턴스 관리,
+ *          점수 계산 및 최고 점수 로딩/저장 기능을 총괄합니다.
+ * @author Hansol
+ * @date 2026-05-28
+ */
 #pragma once
 
 #include <ncurses.h>
@@ -8,7 +16,7 @@
 #include <time.h>
 #include <string>
 #include <fstream>
-#include "map.h"
+#include "board.h"
 #include "snake.h"      
 #include "gate.h"       
 #include "GrowthItem.h"
@@ -21,8 +29,6 @@ using namespace std;
 #define COLOR_GRAY 8
 #define COLOR_BLACK_A 9
 
-// snakepart, head_way 는 snake.h로 이동했으므로 여기서 제거
-
 class SnakeGame {
 public:
     WINDOW* win1, * win2, * win3;
@@ -32,7 +38,7 @@ public:
     int gate_posY;
     int stage_num;
     int stage_flag;
-    int current_speed_level;
+    int current_speed_level; // 현재 스피드 레벨 저장용 변수
     int High_Score; // 최고 점수 저장용 변수
 
     vector<snakepart> gate;
@@ -77,6 +83,7 @@ public:
             infile.close();
         }
 
+        // Snake가 게이트, 스테이지, 게임오버 화면처럼 SnakeGame의 기능을 호출할 수 있도록 현재 객체를 연결합니다.
         snake_obj.bind(this);
     }
 
@@ -86,11 +93,9 @@ public:
     void set_zero();
     void del_win();
 
-    // 스네이크 3종은 Snake로 이전 → 선언 제거
-    // void make_snake();
-    // int  set_Head_Direction();
-    // int  move_Snake();
+    void generate_item();
 
+    
     int  collision_gate();
     void generate_gate();
     int  pass_the_gate();

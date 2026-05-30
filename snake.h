@@ -3,7 +3,7 @@
 #include <ncurses.h>
 #include <vector>
 #include <time.h>
-#include "map.h"
+#include "board.h"
 
 using namespace std;
 
@@ -44,6 +44,7 @@ public:
     SnakeGame* game;
 
     Snake();
+// Snake가 게이트, 스테이지, 게임오버 화면처럼 SnakeGame의 기능을 호출할 수 있도록 현재 객체를 연결합니다.
     void bind(SnakeGame* g) { game = g; }
 
     void make_snake();
