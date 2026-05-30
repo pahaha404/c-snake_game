@@ -167,20 +167,20 @@ void SnakeGame::NEXTGAME(int num) {
         else {
             mvwprintw(win1, 11, 3, "========================");
             mvwprintw(win1, 12, 3, "||    STAGE CLEAR!    ||");
-            mvwprintw(win1, 13, 3, "||      ٩( ᐛ )و       ||");
+            mvwprintw(win1, 13, 3, "||      \\(^o^)/       ||");
             mvwprintw(win1, 14, 3, "========================");
         }
     }
     else if (num == 2) {
         mvwprintw(win1, 11, 3, "========================");
         mvwprintw(win1, 12, 3, "||  ALL STAGE CLEAR!  ||");
-        mvwprintw(win1, 13, 3, "||     ( ღ 'ᴗ'ღ )     ||");
+        mvwprintw(win1, 13, 3, "||     *(ﾉ>ω<)ﾉ :*    ||");
         mvwprintw(win1, 14, 3, "========================");
     }
     else if (num == 3) {
         mvwprintw(win1, 11, 3, "========================");
         mvwprintw(win1, 12, 3, "||     GAME OVER      ||");
-        mvwprintw(win1, 13, 3, "||      ( ಥ﹏ಥ)       ||");
+        mvwprintw(win1, 13, 3, "||      ( x_x )       ||");
         mvwprintw(win1, 14, 3, "========================");
     }
     wrefresh(win1);
