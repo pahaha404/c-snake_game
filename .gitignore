@@ -1,2 +1,4 @@
 snakegame
 snakegame.exe
+*.o
+.vs/

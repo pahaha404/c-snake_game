@@ -25,7 +25,7 @@ struct snakepart {
 };
 
 inline snakepart::snakepart(int col, int row) { x = col; y = row; }
-inline snakepart::snakepart()                 { x = 0;   y = 0;   }
+inline snakepart::snakepart() { x = 0;   y = 0; }
 
 // 방향 인덱스는 0: 위, 1: 왼쪽, 2: 오른쪽, 3: 아래를 의미합니다.
 static const int head_way[4][2] = {{0, -1}, {-1, 0}, {1, 0}, {0, 1}};
@@ -46,13 +46,21 @@ public:
     int Growth_item;
     int Poison_item;
 
-
-    int Reverse_active;
+    // Reverse Item 의 활성 상태와 시작 시각(time(NULL) 기준).
+    // Reverse_active 가 켜져 있는 동안 set_Head_Direction() 이 매 틱
+    // update_reverse_keys() 를 호출해 진행방향에 맞춰 key_to_dir 을 갱신한다.
+    int    Reverse_active;
     time_t Reverse_start;
+
     int key_to_dir[4];
 
 
     vector<snakepart> snake;
+
+    // Golden Apple 획득 시 남은 추가 성장 칸 수.
+    // 일반 이동 분기에서 1 이상이면 꼬리를 자르지 않고 1 씩 차감한다.
+    // 먹은 시점에 2 를 더하므로 (먹은 틱 머리 추가 +1) + (이후 2 틱) = +3.
+    int pending_growth;
 
     SnakeGame* game;
 
@@ -70,4 +78,8 @@ public:
 
     // 현재 방향으로 한 칸 이동하며 충돌, 아이템, 게이트 효과를 처리합니다.
     int  move_Snake();
+
+    // Reverse Item 효과 적용: 현재 진행방향에 수직인 두 화살표 키의 기능을
+    // 서로 맞바꾸어 key_to_dir 을 갱신한다.
+    void update_reverse_keys();
 };
