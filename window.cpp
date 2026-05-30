@@ -127,16 +127,16 @@ void SnakeGame::set_zero(){
 void SnakeGame::NEXTGAME(const int num){
   wclear(win1);
   if(num == 1){
-    mvwprintw(win1, 10, 24, "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★");
-    mvwprintw(win1, 11, 24, "★      STAGE CLEAR      ★");
-    mvwprintw(win1, 12, 24, "★        ~~~~~>o         ★");
-    mvwprintw(win1, 13, 24, "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★");
+    mvwprintw(win1, 10, 24, "+ - - - - - - - - - - - +");
+    mvwprintw(win1, 11, 24, "|      STAGE CLEAR      |");
+    mvwprintw(win1, 12, 24, "|        !!!!!!!        |");
+    mvwprintw(win1, 13, 24, "+ - - - - - - - - - - - +");
   }
   else if(num == 2){
-    mvwprintw(win1, 10, 24, "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★");
-    mvwprintw(win1, 11, 24, "★     STAGE ALL CLEAR   ★");
-    mvwprintw(win1, 12, 24, "★        ~~~~~>o         ★");
-    mvwprintw(win1, 13, 24, "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★");
+    mvwprintw(win1, 10, 24, "+ - - - - - - - - - - - +");
+    mvwprintw(win1, 11, 24, "|   STAGE ALL CLEAR     |");
+    mvwprintw(win1, 12, 24, "|        !!!!!!!        |");
+    mvwprintw(win1, 13, 24, "+ - - - - - - - - - - - +");
   }
   else if(num == 3){
     mvwprintw(win1, 10, 28, "+ - - - - - - - - - - - +");
