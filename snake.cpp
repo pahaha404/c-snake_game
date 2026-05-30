@@ -203,7 +203,7 @@ int Snake::move_Snake() {
     else if (map[stage_num][move_posY][move_posX] == 7 && game->collision_gate() == 7) {
         Head_Direction = game->pass_the_gate();
         game->gate_posX = game->get_yellow_exit_x() + head_way[Head_Direction][0];
-        game->gate_posY = game->get_yellow_exit_y() + head_way[Head_Direction][1];
+        game->gate_posY = game->get_yellow_exit_y() + head_way[Head_Direction][1];  //진출 위치에 머리 삽입, 꼬리 처리
 
         // 이스터에그: 게이트 탈출 출구 좌표 방문 검사 및 마크
         if (game->gate_posX >= 0 && game->gate_posX < 30 && game->gate_posY >= 0 && game->gate_posY < 30) {

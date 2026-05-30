@@ -81,7 +81,7 @@ int Gate::computeExitDirection(const int inDir, const int stage_num) const {
     const bool up_open    = canExitTo(ex + head_way[DIR_UP][0],    ey + head_way[DIR_UP][1],    stage_num);
     const bool down_open  = canExitTo(ex + head_way[DIR_DOWN][0],  ey + head_way[DIR_DOWN][1],  stage_num);
     const bool left_open  = canExitTo(ex + head_way[DIR_LEFT][0],  ey + head_way[DIR_LEFT][1],  stage_num);
-    const bool right_open = canExitTo(ex + head_way[DIR_RIGHT][0], ex + head_way[DIR_RIGHT][1], stage_num);
+    const bool right_open = canExitTo(ex + head_way[DIR_RIGHT][0], ey + head_way[DIR_RIGHT][1], stage_num);
 
     // [명세 규칙 2-1] 진출방향이 위쪽 또는 아래쪽일 경우 (세로 출구가 열려있음)
     //   - 진입이 좌, 위 -> 위로 진출
@@ -217,13 +217,13 @@ void SnakeGame::generate_gate() {
     do {
         x1 = rand() % MAP_N;
         y1 = rand() % MAP_N;
-    } while (map[stage_num][y1][x1] != CELL_WALL);
+    } while (map[stage_num][y1][x1] != CELL_WALL);  // 게이트가 생길 수 있는 벽일 때까지
 
     do {
         x2 = rand() % MAP_N;
         y2 = rand() % MAP_N;
-    } while (map[stage_num][y2][x2] != CELL_WALL ||
-             (x1 == x2 && y1 == y2));
+    } while (map[stage_num][y2][x2] != CELL_WALL || // 벽이 아니거나
+             (x1 == x2 && y1 == y2));   // 첫 게이트와 겹치면 다시
 
     do {
         bx1 = rand() % MAP_N;
