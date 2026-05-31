@@ -1,4 +1,13 @@
+/**
+ * @file snake.h
+ * @brief Snake 객체와 Snake 몸통 좌표 구조체를 정의하는 헤더 파일
+ * @details Snake의 이동 방향, 몸 길이, 아이템 획득 상태, Reverse Item 효과,
+ *          Golden Apple의 pending growth 상태를 관리한다.
+ * @author Hansol
+ * @date 2026-05-28
+ */
 #pragma once
+
 
 #include <ncurses.h>
 #include <vector>

@@ -8,7 +8,7 @@
 #include "board.h"
 #include <cstdlib>
 
-void GrowthItem::generate(int stage_num) {
+void GrowthItem::generate(const int stage_num) {
     // 벽/다른 아이템/스네이크 몸 등 이미 무언가 있는 칸을 침범하지 않도록
     // 빈칸(0) 이 나올 때까지 좌표를 다시 뽑는다. 30x30 맵에서 빈칸 비중이
     // 압도적이라 평균 시도 횟수는 매우 적다.

@@ -8,7 +8,7 @@
 #include "board.h"
 #include <cstdlib>
 
-void PoisonItem::generate(int stage_num) {
+void PoisonItem::generate(const int stage_num) {
     int px, py;
     do {
         px = rand() % 30;

@@ -9,7 +9,7 @@
 #include "board.h"
 #include <cstdlib>
 
-void GoldenApple::generate(int stage_num) {
+void GoldenApple::generate(const int stage_num) {
     // 확률 게이트: rand() % N == 0 인 경우에만 통과.
     // N=10 → 사이클당 1/10 등장. N 값을 키우면 더 희귀해진다 (예: 20 → 1/20).
     if (rand() % 10 != 0) return;

@@ -12,7 +12,7 @@
 
 class GrowthItem {
 public:
-    void generate(int stage_num);
+    void generate(const int stage_num);
 };
 
 #endif
