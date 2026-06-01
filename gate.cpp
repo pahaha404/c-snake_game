@@ -70,51 +70,24 @@ int Gate::computeExitDirection(const int inDir, const int stage_num) const {
     }
 
     // 2) 진출하는 Gate의 위치가 MAP의 가운데에 있을 경우:
-    //   - 우선순위 1: 기존 진행 방향 유지
-    const int straight_nx = ex + head_way[inDir][0];
-    const int straight_ny = ey + head_way[inDir][1];
-    if (canExitTo(straight_nx, straight_ny, stage_num)) {
-        return inDir;
-    }
-
-    //   - 기존 진행 방향이 막힌 경우, 열려 있는 방향들 중 명세 우선순위 규칙 적용:
-    const bool up_open    = canExitTo(ex + head_way[DIR_UP][0],    ey + head_way[DIR_UP][1],    stage_num);
-    const bool down_open  = canExitTo(ex + head_way[DIR_DOWN][0],  ey + head_way[DIR_DOWN][1],  stage_num);
-    const bool left_open  = canExitTo(ex + head_way[DIR_LEFT][0],  ey + head_way[DIR_LEFT][1],  stage_num);
-    const bool right_open = canExitTo(ex + head_way[DIR_RIGHT][0], ey + head_way[DIR_RIGHT][1], stage_num);
-
-    // [명세 규칙 2-1] 진출방향이 위쪽 또는 아래쪽일 경우 (세로 출구가 열려있음)
-    //   - 진입이 좌, 위 -> 위로 진출
-    //   - 진입이 우, 하 -> 아래로 진출
-    if (up_open || down_open) {
-        if (inDir == DIR_LEFT || inDir == DIR_UP) {
-            if (up_open) return DIR_UP;
-            if (down_open) return DIR_DOWN;
-        } else {
-            if (down_open) return DIR_DOWN;
-            if (up_open) return DIR_UP;
+    //    명세(Game Rule #4)의 우선순위를 그대로 따른다.
+    //      (1) 진입 방향과 일치하는 방향
+    //      (2) 진입 방향의 시계방향
+    //      (3) 진입 방향의 반시계방향
+    //      (4) 진입 방향과 반대 방향
+    //    위 순서대로 후보를 보되, 벽/Immune Wall로 막힌 방향은 건너뛰고
+    //    가장 먼저 진출 가능한 방향을 선택한다.
+    const int order[4] = {
+        inDir,
+        clockwise(inDir),
+        counterClockwise(inDir),
+        opposite(inDir)
+    };
+    for (int i = 0; i < 4; ++i) {
+        const int d = order[i];
+        if (canExitTo(ex + head_way[d][0], ey + head_way[d][1], stage_num)) {
+            return d;
         }
-    }
-
-    // [명세 규칙 2-2] 진출방향이 왼쪽 또는 오른쪽일 경우 (가로 출구가 열려있음)
-    //   - 진입이 좌, 위 -> 좌로 진출
-    //   - 진입이 우, 하 -> 우로 진출
-    if (left_open || right_open) {
-        if (inDir == DIR_LEFT || inDir == DIR_UP) {
-            if (left_open) return DIR_LEFT;
-            if (right_open) return DIR_RIGHT;
-        } else {
-            if (right_open) return DIR_RIGHT;
-            if (left_open) return DIR_LEFT;
-        }
-    }
-
-    //   - 우선순위 4: 역방향 (그 외 모든 방향이 막혀있을 때)
-    const int rev = opposite(inDir);
-    const int rev_nx = ex + head_way[rev][0];
-    const int rev_ny = ey + head_way[rev][1];
-    if (canExitTo(rev_nx, rev_ny, stage_num)) {
-        return rev;
     }
 
     return inDir;
@@ -217,13 +190,13 @@ void SnakeGame::generate_gate() {
     do {
         x1 = rand() % MAP_N;
         y1 = rand() % MAP_N;
-    } while (map[stage_num][y1][x1] != CELL_WALL);  // 게이트가 생길 수 있는 벽일 때까지
+    } while (map[stage_num][y1][x1] != CELL_WALL);
 
     do {
         x2 = rand() % MAP_N;
         y2 = rand() % MAP_N;
-    } while (map[stage_num][y2][x2] != CELL_WALL || // 벽이 아니거나
-             (x1 == x2 && y1 == y2));   // 첫 게이트와 겹치면 다시
+    } while (map[stage_num][y2][x2] != CELL_WALL ||
+             (x1 == x2 && y1 == y2));
 
     do {
         bx1 = rand() % MAP_N;
