@@ -153,7 +153,7 @@ int Snake::move_Snake() {
         map[stage_num][snake[1].y][snake[1].x] = 4;
         refresh();
     }
-    // Poison Item(6): 꼬리 두 칸을 잘라 길이 -2.
+    // Poison Item(6): 꼬리 두 칸 제거 + 새 머리 추가로 최종 길이 -1.
     // 단, 적용 전 길이가 3 인 경우 결과 길이가 너무 작아지므로 즉시 게임오버.
     else if (map[stage_num][move_posY][move_posX] == 6) {
         if (snake.size() == 3) {
