@@ -29,7 +29,7 @@ void SnakeGame::color_init() {
     init_pair(9, COLOR_MAGENTA, COLOR_MAGENTA); // Reverse Direction Item
     init_pair(11, COLOR_BLUE, COLOR_BLUE);
 
-    // Golden Apple: 표준 8색에는 진짜 골드가 없어, ncurses 의 init_color 로
+    // Golden Apple: 표준 8색에는 진짜 골드가 없기에 ncurses 의 init_color 로
     // RGB(1000, 843, 0) 톤을 새 슬롯에 직접 정의해 사용한다.
     init_color(COLOR_GOLD, 1000, 843, 0);
     init_pair(10, COLOR_GOLD, COLOR_GOLD);      // Golden Apple
@@ -38,7 +38,7 @@ void SnakeGame::color_init() {
 void SnakeGame::color() {
     // 셀 값(0~9) → 색 페어 인덱스 매핑 테이블.
     // 셀 값 11(Blue Gate) 은 범위 밖이라 아래에서 별도로 처리한다.
-    int pair_map[] = { 8, 1, 2, 3, 4, 5, 6, 7, 9, 10 };
+    const int pair_map[] = { 8, 1, 2, 3, 4, 5, 6, 7, 9, 10 };
 
     for (int i = 0; i < 30; i++) {
         for (int j = 0; j < 30; j++) {
@@ -67,11 +67,11 @@ void SnakeGame::color() {
 
 void SnakeGame::score() {
     // Body_length, Growth_item, Poison_item, Gate_cnt
-    int goal[4][4] = {
+    static const int goal[4][4] = {
         {5, 2, 1, 1},   // Stage 1 (길이 5)
-        {6, 3, 1, 1},   // Stage 2 (길이 6 - 아주 깔끔하고 부담 없는 난이도!)
+        {6, 3, 1, 1},   // Stage 2 (길이 6)
         {7, 4, 2, 2},   // Stage 3 (길이 7)
-        {8, 5, 3, 3}    // Stage 4 (길이 8 - 최종 보스전!)
+        {8, 5, 3, 3}    // Stage 4 (길이 8)
     };
     // 목표 점수 표시
     wborder(win2, '|', '|', '-', '-', '+', '+', '+', '+');
@@ -152,7 +152,7 @@ void SnakeGame::set_zero() {
     easter_egg_eligible = true;
 }
 
-void SnakeGame::NEXTGAME(int num) {
+void SnakeGame::NEXTGAME(const int num) {
     wclear(win1);
     if (num == 1) {
         if (easter_egg_eligible) {

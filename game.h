@@ -83,8 +83,6 @@ public:
             infile >> High_Score;
             infile.close();
         }
-
-        // Snake가 게이트, 스테이지, 게임오버 화면처럼 SnakeGame의 기능을 호출할 수 있도록 현재 객체를 연결합니다.
         snake_obj.bind(this);
     }
 
@@ -93,8 +91,6 @@ public:
     void score();
     void set_zero();
     void del_win();
-
-    void generate_item();
 
     
     int  collision_gate();
@@ -109,6 +105,6 @@ public:
     int  get_blue_exit_x()   const;
     int  get_blue_exit_y()   const;
 
-    void NEXTGAME(int num);
+    void NEXTGAME(const int num);
     void game();
 };

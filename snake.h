@@ -18,11 +18,11 @@ using namespace std;
 
 struct snakepart {
     int x, y;
-    snakepart(int col, int row);
+    snakepart(const int col, const int row);
     snakepart();
 };
 
-inline snakepart::snakepart(int col, int row) { x = col; y = row; }
+inline snakepart::snakepart(const int col, const int row) { x = col; y = row; }
 inline snakepart::snakepart() { x = 0;   y = 0; }
 
 static const int head_way[4][2] = { {0, -1}, {-1, 0}, {1, 0}, {0, 1} };
